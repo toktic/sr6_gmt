@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="us">
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta charset="utf-8">
+	<title>Shadowrun Mob Master</title>
+	<link href="css/jquery-ui.css" rel="stylesheet">
+	<link href="css/sr_tools.css" rel="stylesheet">
+	<script src="js/jquery.js"></script>
+	<script src="js/jquery-ui.js"></script>
+	<script src="js/sr_tools.js"></script>
+	<script src="js/sr_tools_db.js"></script>
+	<script src="js/sr_tools_gen.js"></script>
+	<script src="js/sr_tools_render.js"></script>
+	<script src="js/sr_tools_roll.js"></script>
+	<script src="js/sr_tools_run.js"></script>
+	<script src="js/sr_tools_storage.js"></script>
+	<script>
+		$(function()
+		{
+			setup_controls();
+		});
+	</script>
+</head>
+<body>
+<div class="top_bar">
+	<div class="title">Shadowrun Mob Master</div>
+	<div class="version"></div>
+	<div class="top_bar_roller">
+		<div class="numbers">
+			<div class="row">
+				<button roll="1">01</button>
+				<button roll="2">02</button>
+				<button roll="3">03</button>
+				<button roll="4">04</button>
+				<button roll="5">05</button>
+				<button roll="6">06</button>
+				<button roll="7">07</button>
+				<button roll="8">08</button>
+				<button roll="9">09</button>
+				<button roll="10">10</button>
+			</div>
+			<div class="row">
+				<button roll="11">11</button>
+				<button roll="12">12</button>
+				<button roll="13">13</button>
+				<button roll="14">14</button>
+				<button roll="15">15</button>
+				<button roll="16">16</button>
+				<button roll="17">17</button>
+				<button roll="18">18</button>
+				<button roll="19">19</button>
+				<button roll="20">20</button>
+			</div>
+			<div class="row">
+				<button roll="21">21</button>
+				<button roll="22">22</button>
+				<button roll="23">23</button>
+				<button roll="24">24</button>
+				<button roll="25">25</button>
+				<button roll="26">26</button>
+				<button roll="27">27</button>
+				<button roll="28">28</button>
+				<button roll="29">29</button>
+				<button roll="30">30</button>
+			</div>
+			<div class="row">
+				<button roll="31">31</button>
+				<button roll="32">32</button>
+				<button roll="33">33</button>
+				<button roll="34">34</button>
+				<button roll="35">35</button>
+				<button roll="36">36</button>
+				<button roll="37">37</button>
+				<button roll="38">38</button>
+				<button roll="39">39</button>
+				<button roll="40">40</button>
+			</div>
+		</div>
+		<div class="edging">
+			<div class="row">
+				<input type="radio" id="explode" name="radio">
+				<label for="explode">Explode</label>
+			</div>
+			<div class="row">
+				<input type="radio" id="normal" name="radio" checked="checked">
+				<label for="normal">Normal</label>
+			</div>
+		</div>
+		<div class="roll_results"><textarea id="roll_results"></textarea></div>
+	</div>
+</div>
+
+<div class="menu">
+	<button class="cast">Cast of Shadows</button>
+	<button class="minion">NPC Generator</button>
+	<button class="contact">Contact Generator</button>
+	<button class="run">Run Generator</button>
+	<button class="faq">FAQ</button>
+	<button class="settings">Settings</button>
+</div>
+
+<div class="main_content"></div>
+
+<div template_holder>
+	<div template="main_screen" class="intro_screen">
+		<div>Welcome to my Shadowrun GM Mob Master!</div>
+
+		<p>The GM Mob Master was created as a set of tools for Shadowrun game masters. It started as a way of generating extra NPCs for combat-heavy runs, and as a thought exercise in how to expand the list of grunts in the Core Rulebook to more situations. The intent was to include generators and lists that would make it easier for game masters to get mechanics out of the way and spend more time telling stories. My hope was that this will eventually make it easy for game masters to generate an entire session of entertainment with the click of a few buttons.</p>
+
+		<p>It is divided into several sections, all of which can be accessed by the buttons on the left. There is also a dice-simulator at the top to let you quickly simulate a fist-full of dice. Remember, as a GM you don't have to be honest with how many successes or failures you "rolled"...</p>
+
+		<ul>
+			<li>The first section is <b>Cast of Shadows</b>. This holds the full assortment of npcs that you create and save for use later. The "Full Cast" lists all saved cast members. You can create plenty of custom tabs and list only the cast members you need for a scene on that tab.</li>
+			<li>Next up is the <b>NPC Generator</b>. You can use the tabs within to create a single NPC or a horde of them. Just be aware that if you create one and don't save them to the <b>Cast of Shadows</b>, they will disappear and be lost.</li>
+			<li><b>Settings</b> has a selection of, you guessed it, Settings that you can change. This also has a Nuke button if you want to delete all of your saved information and start over from scratch.</li>
+		</ul>
+
+		<p>This has also served as a creative outlet for programming for my own enjoyment. I have spent quite a few hours on this utility in the name of fun. There was never any intention of turning this into a money-generating enterprise. I don't want to deal with the legal or infrastructure headaches. Though if you happen to find me at a convention and want to say thanks, you can buy me a beer at GenCon. If you want to complain or sue me, I don't exist and don't attend GenCon. :D</p>
+
+		<p>On data-retention: I use a piece of web programming functionality called Local Storage that act a little bit like cookies. The data is stored in your browser's cache for you for that browser. I have to specify both of those because it's not shared to other users on your computer, nor even other browsers. It certainly isn't shared to other computers, and I don't have access to it at all. So if you spend the time to create and save a cast of shadow denizens, make sure you create it on the computer you're bringing to the game session. Or print them out, that works too!</p>
+
+		<p>As with many side projects, there is a whole list of things I want to add to this utility. There are plenty of features that I haven't had the time to add yet. Since I'm not getting paid to work on this, it only happens when I do have spare time that isn't being spent on other things. And there will eventually come a time that I wash my hands of this and let it sit on a shelf to die from neglect. It may not be a nice thing to say, but it's the truth. This utility isn't meant to be a replacement for the Shadowrun books, either. I make an assumption that users are familiar with the basics of Shadowrun, from what an Adept is to what constitutes a Mr. Johnson, and are able to look things up as needed, like specific equipment information. It is meant as a supplement and assistant, much like how HeroLab and Chummer make PC creation easier for runners. I will not try to make this fully comprehensive and cover every possible option. There are too many source books to keep up with and this isn't meant to be a replacement for sourcebooks.</p>
+
+		<p>Have fun with this tool! It is meant to be used and intended to make your life easier as a GM. Speaking of which, always try to offer your players the chance to make a deal with a dragon.</p>
+
+		<div class="legalese">The Topps Company, Inc. has sole ownership of the names, logo, artwork, marks, photographs, sounds, audio, video and/or any proprietary matrial used in connection with the game Shadowrun.<br />The Topps Company, Inc. has granted permission to GM Mob Master to use such names, logos, artwork, marks and/or any proprietary materials for promotional and informational purposes on its website but does not endorse, and is not affiliated with this utility in any official capacity whatsoever.<br />Original content within GM Mob Master is licensed under the Creative Commons Attribution-NonCommercial 4.0 International. So if you use anything here, please give credit where it is due.<br />GM Mob Master is provided "as is" and no warranties or guarantees are provided or inferred. In no event shall the copyright holder or contributors be liable for damage however they are caused. Don't be a jerk!</div>
+
+		<div class="build_mismatch_nuke_storage">
+			<p>The software version you are running does not match the stored data's version which will cause issues. Do you want to delete the local stored data and start from scratch?</p>
+			<p>Alternately, look at the stored data version and grab that version of code instead.</p>
+			<ul>
+				<li software_version>a</li>
+				<li stored_version>b</li>
+				<li link>c</li>
+			</ul>
+		</div>
+	</div>
+
+	<div template="cast_of_shadows">
+		<div class="cast_of_shadows">
+			<ul class="cast_tabs">
+				<li tab_id="0"><a href="#0" tab_id="0">Cast Management</a></li>
+			</ul>
+			<div id="0">
+				<div>Welcome to your cast of shadows! You can edit tab names and rearrange them here.</div>
+
+				<div class="spacer_40"></div>
+
+				<div class="edit_tabs">
+					<div class="add_tab_wrapper">
+						<span>Add tab:</span>
+						<input id="add_tab_name"/>
+						<button class="add_tab smaller_button"><span class="ui-icon ui-icon-circle-plus"></span></button>
+					</div>
+
+					<div class="spacer_20"></div>
+
+					<div class="edit_tab_wrapper">
+						<span>Edit tabs:</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div template="edit_tab_row">
+		<span number></span>
+		<input id="tab_name" />
+		<button class="tab_edit smaller_button"><span class="ui-icon ui-icon-check"></span></button>
+		<button class="tab_up smaller_button"><span class="ui-icon ui-icon-arrowthick-1-n"></span></button>
+		<button class="tab_down smaller_button"><span class="ui-icon ui-icon-arrowthick-1-s"></span></button>
+		<button class="delete_tab smaller_button"><span class="ui-icon ui-icon-trash"></span></button>
+	</div>
+
+	<div template="faq">
+		<h2>FAQ</h2>
+
+		<h3>Frequently Asked Questions &amp; Functionally Annoying Quirks</h3>
+
+		<div>
+			This is a listing of questions that have been asked or other points of knowledge that are likely relevant to new users.
+			This is also a collection of quirks and annoyances that have cropped up as part of turning a rulebook into an application.
+		</div>
+
+		<ul>
+			<li>NPC stats: The attributes for all NPCs follow a curve the higher up the professional rating goes.</li>
+			<li>Cyberlimbs: All cyberlimbs (arms &amp; legs) are assumed to have the same Strength and Agility scores as the NPC. So there is no additional averaging of attributes or other nonsense.</li>
+		</ul>
+	</div>
+
+	<div template="settings">
+		<h2>Settings</h2>
+		<div class="row">
+			<div class="description">This will remove all settings, NPCs, everything. It's the frag grenade in the china shop. Everything will be lost, nothing will be saved.</div>
+			<button id="delete_localstorage">Nuke it from orbit</button>
+		</div>
+
+		<div class="row">
+			<h3>Minion Condition Monitor</h3>
+			<p>Minions, by default, have a combined Condition Monitor based on their BODY and WILL scores. If you want your minions to have separate health tracks for Stun and Physical damage, make that change here.</p>
+			<p>Changes here will reflect on all minions created after this point. Any minions already existing will need to be edited individually.</p>
+			<div setting="condition_monitor">
+				<input type="radio" id="combined" name="condition_monitor"><label for="combined">Combined</label>
+				<input type="radio" id="separate" name="condition_monitor"><label for="separate">Separate</label>
+			</div>
+		</div>
+
+		<div class="row">
+			<h3>Minion Wound Penalties</h3>
+			<p>Minions normally suffer a die penalty of -1 per 3 full boxes on their condition monitor. This can be changed to every 2 boxes, every box, or even ignore wound penalties.</p>
+			<p>Changes here will reflect on all minions created after this point. Any minions already existing will need to be edited individually.</p>
+			<div setting="wound_penalty">
+				<input type="radio" id="3" name="wound_penalty"><label for="3">-1 per 3 boxes</label>
+				<input type="radio" id="2" name="wound_penalty"><label for="2">-1 per 2 boxes</label>
+				<input type="radio" id="1" name="wound_penalty"><label for="1">-1 every box</label>
+				<input type="radio" id="0" name="wound_penalty"><label for="0">No wound penalties</label>
+			</div>
+		</div>
+
+		<div class="delete_localstorage_dialog">
+			<p>This option cannot be undone. Once you delete everything here, you'll have to start all over again. On the plus side, this is great if you want to make sure no hacker finds traces of your activities here.</p>
+		</div>
+	</div>
+
+	<div template="minion_generator_section" class="minion_generator_section">
+		<div class="section_tabs">
+			<ul>
+				<li><a href="#overview">Generator Overview</a></li>
+				<li><a href="#minion_generator">Individual NPC Generator</a></li>
+				<li><a href="#mob_generator">Group of NPCs Generator</a></li>
+			</ul>
+			<div id="overview">
+				<div class="intro">The NPC Generator is the concept that kicked off the creation of these tools. Here, you can easily create a bunch of thugs to harass the party or a high-powered HTR team to flush them out of a corp building.</div>
+				<div class="intro">When generating a single NPC, there are several categories and overall options you can choose from or leave it all up to chance. After the NPC is created, you can save them in the <b>Cast of Shadows</b> section. They can also be edited both immediately or later. However, they are not saved until they have been added to the <b>Cast of Shadows</b>.</div>
+				<div class="intro">Generating a group of NPCs works similarly, defining only broad strokes here and letting you individually refine the NPCs later.</div>
+				<div class="intro">Generating one of the <i>Special Types</i> only happens if you choose the option for it.</div>
+				<div class="intro">These NPCs use the sample grunts in the Core Rulebook as guidelines. They aren't meant to be perfect nor even optimal. Attributes and skill ranks are an approximation of what I considered reasonably good for a given profession and power level. Feel free to take all of these with a grain of salt.</div>
+				<button class="generate_mook">Generate one NPC</button>
+				<button class="generate_mob">Generate a group</button>
+			</div>
+			<div id="minion_generator">
+				<div class="entry_form">
+					<div class="input_row">
+						<label equalize>Name</label>
+						<input name="name" placeholder="Random NPC"/>
+					</div>
+
+					<div class="input_row">
+						<label equalize>Race</label>
+						<select name="race">
+							<option value="">- Random</option>
+							<option value="Human">Human</option>
+							<option value="Elf">Elf</option>
+							<option value="Dwarf">Dwarf</option>
+							<option value="Ork">Ork</option>
+							<option value="Troll">Troll</option>
+						</select>
+					</div>
+
+					<div class="input_row">
+						<label equalize>Gender</label>
+						<select name="gender">
+							<option value="">- Random</option>
+							<option value="Male">Male</option>
+							<option value="Female">Female</option>
+						</select>
+					</div>
+
+					<div class="input_row">
+						<label equalize>Professional Rating</label>
+						<select name="professional_rating">
+							<option value="">- Random</option>
+							<option value="0">0</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+						</select>
+					</div>
+
+					<div class="input_row">
+						<label equalize>Professional Type</label>
+						<select name="professional_type">
+							<option value="">- Random</option>
+							<option value="civilian">Civilian</option>
+							<option value="thug">Thugs & Protesters</option>
+							<option value="ganger">Gang Member</option>
+							<option value="corpsec">Corporate Security</option>
+							<option value="police">Law Enforcement</option>
+							<option value="mob">Organized Crime</option>
+							<option value="cultist">Cultists & Politicos</option>
+							<option value="htr">High Threat Response</option>
+							<option value="specops">Special Operations</option>
+						</select>
+					</div>
+
+					<div class="input_row">
+						<label equalize>Special Type?</label>
+						<select name="is_special">
+							<option value="no">- No</option>
+							<option value="is_lt">Lieutenant</option>
+							<option value="is_decker">Decker</option>
+							<option value="is_adept">Physical Adept</option>
+							<option value="is_mage">Full Magician</option>
+						</select>
+					</div>
+
+					<div class="spacer_20"></div>
+
+					<button id="generate_minion">Generate NPC</button>
+
+					<div id="generated_results"></div>
+
+					<button id="discard_minion">Discard</button>
+
+					<button id="add_to_cast">Add to Cast</button>
+
+					<button id="add_dialog">Add to Specific Tab</button>
+				</div>
+			</div>
+			<div id="mob_generator">
+				<div class="entry_form">
+					<div class="input_row">
+						<label equalize>Mob Name</label>
+						<input name="name" placeholder="Random Mob"/>
+					</div>
+
+					<div class="input_row">
+						<label equalize>Number</label>
+						<select name="number">
+							<option value="two_four">2 - 4 npcs</option>
+							<option value="three_six">3 - 6 npcs</option>
+							<option value="four_ten">4 - 10 npcs</option>
+						</select>
+					</div>
+
+					<div class="input_row">
+						<label equalize>Race</label>
+						<select name="race">
+							<option value="">- Individually Random</option>
+							<option value="Human">All Human</option>
+							<option value="Elf">All Elf</option>
+							<option value="Dwarf">All Dwarf</option>
+							<option value="Ork">All Ork</option>
+							<option value="Troll">All Troll</option>
+						</select>
+					</div>
+
+					<div class="input_row">
+						<label equalize>Gender</label>
+						<select name="gender">
+							<option value="">- Individually Random</option>
+							<option value="Male">All Male</option>
+							<option value="Female">All Female</option>
+						</select>
+					</div>
+
+					<div class="input_row">
+						<label equalize>Professional Rating</label>
+						<select name="professional_rating">
+							<option value="group">- Group Random</option>
+							<option value="">- Individually Random</option>
+							<option value="0">0</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+						</select>
+					</div>
+
+					<div class="input_row">
+						<label equalize>Professional Type</label>
+						<select name="professional_type">
+							<option value="group">- Group Random</option>
+							<option value="">- Individually Random</option>
+							<option value="civilian">Civilian</option>
+							<option value="thug">Thugs & Protesters</option>
+							<option value="ganger">Gang Member</option>
+							<option value="corpsec">Corporate Security</option>
+							<option value="police">Law Enforcement</option>
+							<option value="mob">Organized Crime</option>
+							<option value="cultist">Cultists & Politicos</option>
+							<option value="htr">High Threat Response</option>
+							<option value="specops">Special Operations</option>
+						</select>
+					</div>
+
+					<div class="input_row">
+						<label equalize>Special Types</label>
+						<div class="add_special_types">
+							<label for="special_lieutenant">Add Lieutenant</label>
+							<input type="checkbox" name="special_lieutenant" id="special_lieutenant">
+							<label for="special_decker">Add Decker</label>
+							<input type="checkbox" name="special_decker" id="special_decker">
+							<label for="special_adept">Add Physical Adept</label>
+							<input type="checkbox" name="special_adept" id="special_adept">
+							<label for="special_magician">Add Hermetic Magician</label>
+							<input type="checkbox" name="special_magician" id="special_magician">
+						</div>
+					</div>
+
+					<div class="spacer_20"></div>
+
+					<button id="generate_mob">Generate Group</button>
+
+					<div id="generated_results"></div>
+
+					<button id="discard_minion">Discard All</button>
+
+					<button id="add_to_cast">Add all to Cast</button>
+
+					<button id="add_dialog">Add to Specific Tab</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div template="render__display_npc" class="display_npc_wrapper">
+		<div class="controls">
+			<button class="tiny_button action"><span title="Action mode" class="ui-icon ui-icon-play"></span></button>
+			<button class="tiny_button edit"><span title="Edit mode" class="ui-icon ui-icon-pencil"></span></button>
+		</div>
+		<div class="npc_name"></div>
+		<div class="npc_description"></div>
+		<div class="npc_notes"></div>
+		<div class="attribute_names">
+			<div class="attribute_name">BOD</div>
+			<div class="attribute_name">AGI</div>
+			<div class="attribute_name">REA</div>
+			<div class="attribute_name">STR</div>
+			<div class="attribute_name">WIL</div>
+			<div class="attribute_name">LOG</div>
+			<div class="attribute_name">INT</div>
+			<div class="attribute_name">CHA</div>
+			<div class="attribute_name essence">ESS</div>
+			<div class="attribute_name magic">MAG</div>
+		</div>
+
+		<div class="attribute_values">
+			<div class="attribute_value body"></div>
+			<div class="attribute_value agility"></div>
+			<div class="attribute_value reaction"></div>
+			<div class="attribute_value strength"></div>
+			<div class="attribute_value will"></div>
+			<div class="attribute_value logic"></div>
+			<div class="attribute_value intuition"></div>
+			<div class="attribute_value charisma"></div>
+			<div class="attribute_value essence"></div>
+			<div class="attribute_value magic"></div>
+		</div>
+
+		<div class="information">
+			<div class="initiative">
+				<label>Initiative</label>
+				<div class="value"></div>
+			</div>
+
+			<div class="astral_initiative">
+				<label>Astral Initiative</label>
+				<div class="value"></div>
+			</div>
+
+			<div class="matrix_initiative">
+				<label>Matrix Initiative (Hot VR)</label>
+				<div class="value"></div>
+			</div>
+
+			<div class="damage_resistance">
+				<label>Damage Resistance</label>
+				<div class="value"></div>
+			</div>
+
+			<div class="condition_monitor">
+				<label>Condition Monitor</label>
+				<div class="value"></div>
+			</div>
+
+			<div class="limits">
+				<label>Limits</label>
+				<div class="value"></div>
+			</div>
+
+			<div class="qualities">
+				<label>Qualities</label>
+				<div class="value"></div>
+			</div>
+
+			<div class="initiate_grade">
+				<label>Initiate Grade</label>
+				<div class="value"></div>
+			</div>
+
+			<div class="skills">
+				<label>Skills</label>
+				<div class="value"></div>
+			</div>
+
+			<div class="augments">
+				<label>Augmentations</label>
+				<div class="value"></div>
+			</div>
+
+			<div class="armor">
+				<label>Armor</label>
+				<div class="value"></div>
+			</div>
+
+			<div class="gear">
+				<label>Gear</label>
+				<div class="value"></div>
+			</div>
+
+			<div class="spells">
+				<label>Spells</label>
+				<div class="value"></div>
+			</div>
+
+			<div class="powers">
+				<label>Powers</label>
+				<div class="value"></div>
+			</div>
+
+			<div class="programs">
+				<label>Programs</label>
+				<div class="value"></div>
+			</div>
+		</div>
+	</div>
+
+	<div template="render__action_npc" class="display_npc_wrapper action_npc_wrapper">
+		<div class="controls">
+			<button class="tiny_button display"><span title="Display mode" class="ui-icon ui-icon-search"></span></button>
+			<button class="tiny_button edit"><span title="Edit mode" class="ui-icon ui-icon-pencil"></span></button>
+		</div>
+		<div class="npc_name"></div>
+		<div class="npc_description"></div>
+		<div class="npc_notes"></div>
+		<div class="attribute_names">
+			<div class="attribute_name">BOD</div>
+			<div class="attribute_name">AGI</div>
+			<div class="attribute_name">REA</div>
+			<div class="attribute_name">STR</div>
+			<div class="attribute_name">WIL</div>
+			<div class="attribute_name">LOG</div>
+			<div class="attribute_name">INT</div>
+			<div class="attribute_name">CHA</div>
+			<div class="attribute_name essence">ESS</div>
+			<div class="attribute_name magic">MAG</div>
+		</div>
+		<div class="attribute_values">
+			<div class="attribute_value body"></div>
+			<div class="attribute_value agility"></div>
+			<div class="attribute_value reaction"></div>
+			<div class="attribute_value strength"></div>
+			<div class="attribute_value will"></div>
+			<div class="attribute_value logic"></div>
+			<div class="attribute_value intuition"></div>
+			<div class="attribute_value charisma"></div>
+			<div class="attribute_value essence"></div>
+			<div class="attribute_value magic"></div>
+		</div>
+		<div class="information">
+			<div class="initiative">
+				<label>Initiative</label>
+				<div class="rollable">
+					<div class="value"></div>
+					<button class="tiny_button display"><span title="Roll" class="ui-icon ui-icon-seek-next"></span></button>
+					<div class="result"></div>
+				</div>
+			</div>
+
+			<div class="astral_initiative">
+				<label>Astral Initiative</label>
+				<div class="rollable">
+					<div class="value"></div>
+					<button class="tiny_button display"><span title="Roll" class="ui-icon ui-icon-seek-next"></span></button>
+					<div class="result"></div>
+				</div>
+			</div>
+
+			<div class="matrix_initiative">
+				<label>Matrix Initiative (Hot VR)</label>
+				<div class="rollable">
+					<div class="value"></div>
+					<button class="tiny_button display"><span title="Roll" class="ui-icon ui-icon-seek-next"></span></button>
+					<div class="result"></div>
+				</div>
+			</div>
+
+			<div class="dodge">
+				<label>Dodge Roll</label>
+				<div class="rollable">
+					<div class="value"></div>
+					<button class="tiny_button display"><span title="Roll" class="ui-icon ui-icon-seek-next"></span></button>
+					<div class="result"></div>
+				</div>
+			</div>
+
+			<div class="damage_resistance">
+				<label>Damage Resistance</label>
+				<div class="rollable">
+					<div class="value"></div>
+					<button class="tiny_button display"><span title="Roll" class="ui-icon ui-icon-seek-next"></span></button>
+					<div class="result"></div>
+				</div>
+			</div>
+
+			<div class="condition_monitor">
+				<label>Condition Monitor</label>
+			</div>
+
+			<div class="limits">
+				<label>Limits</label>
+				<div class="value"></div>
+			</div>
+
+			<div class="qualities">
+				<label>Qualities</label>
+				<div class="value"></div>
+			</div>
+
+			<div class="initiate_grade">
+				<label>Initiate Grade</label>
+				<div class="value"></div>
+			</div>
+
+			<div class="skills">
+				<label>Skills</label>
+				<div class="skill_list"></div>
+			</div>
+
+			<div class="augments">
+				<label>Augmentations</label>
+				<div class="value"></div>
+			</div>
+
+			<div class="armor">
+				<label>Armor</label>
+				<div class="value"></div>
+			</div>
+
+			<div class="gear">
+				<label>Gear</label>
+				<div class="value"></div>
+			</div>
+
+			<div class="spells">
+				<label>Spells</label>
+				<div class="value"></div>
+			</div>
+
+			<div class="powers">
+				<label>Powers</label>
+				<div class="value"></div>
+			</div>
+
+			<div class="programs">
+				<label>Programs</label>
+				<div class="value"></div>
+			</div>
+		</div>
+	</div>
+
+	<div template="render__edit_npc" class="display_npc_wrapper edit_npc_wrapper">
+		<div class="controls">
+			<button class="big_button save"><span title="Save Changes" class="ui-icon ui-icon-disk"></span></button>
+			<button class="big_button revert"><span title="Revert Changes" class="ui-icon ui-icon-cancel"></span></button>
+		</div>
+		<div class="npc_name">
+			<input id="name" placeholder="Name..."/>
+		</div>
+		<div class="npc_description">
+			<select name="gender">
+				<option value=""></option>
+				<option value="Male">Male</option>
+				<option value="Female">Female</option>
+			</select>
+			<select name="race">
+				<option value="Human">Human</option>
+				<option value="Elf">Elf</option>
+				<option value="Dwarf">Dwarf</option>
+				<option value="Ork">Ork</option>
+				<option value="Troll">Troll</option>
+			</select>
+		</div>
+		<div class="attribute_names">
+			<div class="attribute_name body">BOD</div>
+			<div class="attribute_name agility">AGI</div>
+			<div class="attribute_name reaction">REA</div>
+			<div class="attribute_name strength">STR</div>
+			<div class="attribute_name will">WIL</div>
+			<div class="attribute_name logic">LOG</div>
+			<div class="attribute_name intuition">INT</div>
+			<div class="attribute_name charisma">CHA</div>
+			<div class="attribute_name magic">MAG</div>
+			<div class="attribute_name initiate">INIT</div>
+		</div>
+		<div class="npc_notes">
+			<label>Notes</label>
+			<textarea id="npc_notes"></textarea>
+		</div>
+		<div class="attribute_values">
+			<div class="attribute_value body"></div>
+			<div class="attribute_value agility"></div>
+			<div class="attribute_value reaction"></div>
+			<div class="attribute_value strength"></div>
+			<div class="attribute_value will"></div>
+			<div class="attribute_value logic"></div>
+			<div class="attribute_value intuition"></div>
+			<div class="attribute_value charisma"></div>
+			<div class="attribute_value magic"></div>
+			<div class="attribute_value initiate"></div>
+		</div>
+		<div class="other_information">
+			<div class="condition_monitor">
+				<label>Condition Monitor</label>
+				<div>
+					<input type="radio" name="condition_monitor" id="combined">
+					<label for="combined">Combined</label>
+					<input type="radio" name="condition_monitor" id="separate">
+					<label for="separate">Separate</label>
+				</div>
+			</div>
+			<div class="wound_penalty">
+				<label>Wound Penalties</label>
+				<div>
+					<input type="radio" name="wound_penalty" id="3">
+					<label for="3">-1 per 3 boxes</label>
+					<input type="radio" name="wound_penalty" id="2">
+					<label for="2">-1 per 2 boxes</label>
+					<input type="radio" name="wound_penalty" id="1">
+					<label for="1">-1 per box</label>
+					<input type="radio" name="wound_penalty" id="0">
+					<label for="0">No penalties</label>
+				</div>
+			</div>
+			<div class="qualities">
+				<label class="positive quality">Positive Qualities</label>
+				<div class="positive quality"></div>
+				<label class="negative quality">Negative Qualities</label>
+				<div class="negative quality"></div>
+			</div>
+			<div class="skills">
+				<label>Skills</label>
+				<div class="value"></div>
+			</div>
+			<div class="augments">
+				<label>Augmentations</label>
+				<div class="value"></div>
+			</div>
+			<div class="armor">
+				<label>Armor</label>
+				<div class="value">
+					<select name="armor"></select>
+				</div>
+			</div>
+
+			<div class="weapons">
+				<label>Weapons</label>
+				<div class="value"></div>
+			</div>
+
+			<div class="gear">
+				<label>Gear</label>
+				<div class="value"></div>
+			</div>
+
+			<div class="commlink">
+				<label>Commlink</label>
+				<div class="value">
+					<select name="commlink">
+						<option value="1">Meta Link</option>
+						<option value="2">Sony Emperor</option>
+						<option value="3">Renraku Sensei</option>
+						<option value="4">Erika Elite</option>
+						<option value="5">Hermes Ikon</option>
+						<option value="6">Transys Avalon</option>
+					</select>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div template="condition_monitor_combined">
+		<div class="condition_monitor_combined">
+			<div class="monitor">
+				<div class="boxes"></div>
+				<div class="markers"></div>
+			</div>
+			<div class="penalty"></div>
+		</div>
+	</div>
+
+	<div template="condition_monitor_separate">
+		<div class="condition_monitor_separate">
+			<div class="monitor">
+				<div class="boxes physical"></div>
+				<div class="markers physical"></div>
+				<div class="boxes stun"></div>
+				<div class="markers stun"></div>
+			</div>
+			<div class="penalty"></div>
+		</div>
+	</div>
+
+	<div template="action_skill" class="rollable">
+		<div class="skill"></div>
+		<button class="tiny_button display"><span title="Roll" class="ui-icon ui-icon-seek-next"></span></button>
+		<div class="result"></div>
+	</div>
+
+	<div template="edit_skill">
+		<span class="skill"></span>
+		<div class="skill_rating"><select name="skill_rating"></select></div>
+		<button class="tiny_button remove_skill"><span title="Remove Skill" class="ui-icon ui-icon-close"></span></button>
+	</div>
+
+	<div template="edit_quality">
+		<span class="quality"></span>
+		<button class="tiny_button remove_quality"><span title="Remove Quality" class="ui-icon ui-icon-close"></span></button>
+	</div>
+
+	<div template="edit_augmentation">
+		<span class="augmentation"></span>
+		<div class="augmentation_rating"><select name="augmentation_rating"></select></div>
+		<button class="tiny_button remove_augmentation"><span title="Remove Skill" class="ui-icon ui-icon-close"></span></button>
+	</div>
+
+	<div template="edit_weapon">
+		<span class="weapon"></span>
+		<button class="tiny_button remove_weapon"><span title="Remove Weapon" class="ui-icon ui-icon-close"></span></button>
+	</div>
+
+	<div template="edit_gear">
+		<span class="gear"></span>
+		<button class="tiny_button remove_gear"><span title="Remove Gear" class="ui-icon ui-icon-close"></span></button>
+	</div>
+
+	<div template="display_weapon">
+		<div class="stats"></div>
+		<button class="tiny_button display"><span title="Roll" class="ui-icon ui-icon-seek-next"></span></button>
+		<div class="result"></div>
+	</div>
+
+	<div template="cast__full_list" class="cast__full_list">
+		<div class="empty_message">You do not have any denizens saved to your Cast of Shadows. Nothing to see here, move along.</div>
+		<div class="cast_message">This is a full list of all denizens that you have added to your Cast of Shadows.</div>
+		<div list></div>
+	</div>
+
+	<div template="cast__full_list_entry">
+		<div class="entry"></div>
+		<div class="tools">
+			<button class="clone_cast_member"><span title="Clone" class="ui-icon ui-icon-copy"></span></button>
+			<button class="delete_cast_member"><span title="Delete" class="ui-icon ui-icon-circle-close"></span></button>
+			<div class="created_date"></div>
+			<div class="edited_date"></div>
+			<div class="add_to_tab">
+				<div>
+					<span>Add NPC to tab:</span>
+					<select name="tab_name"></select>
+				</div>
+				<button class="add_npc"><span title="Just Add">Add NPC</span></button>
+				<button class="add_npc_and_switch"><span title="Add &amp; Switch">Add &amp; Switch Tabs</span></button>
+			</div>
+
+			<div class="clone_dialog">Do you want to clone this NPC? This will generate a new clone without adding them to any cast tabs.</div>
+			<div class="delete_dialog">Are you sure you want to delete this character? Removing it here will also remove it from all other tabs. This is perma-death.</div>
+			<div class="tab_clone_dialog">Do you want to clone this NPC? This will add the clone to all of the same tabs.</div>
+			<div class="tab_delete_dialog">Are you sure you want to remove this character? This only removes the NPC from the current tab.</div>
+		</div>
+	</div>
+
+	<div template="cast__tab_list" class="cast__tab_list">
+		<div list></div>
+	</div>
+
+	<div template="cast__tab_list_entry">
+		<div class="entry"></div>
+		<div class="tools">
+			<button class="clone_cast_member"><span title="Clone" class="ui-icon ui-icon-copy"></span></button>
+			<button class="delete_cast_member"><span title="Delete" class="ui-icon ui-icon-circle-close"></span></button>
+			<div class="dialog">Remove this character from this tab? This character can still be found in the full cast.</div>
+			<div class="created_date"></div>
+			<div class="edited_date"></div>
+		</div>
+	</div>
+
+	<div template="add_dialog_single" class="add_dialog_single">
+		<div class="existing_tab_wrapper">
+			<div>Add this NPC to one of the existing tabs.</div>
+			<div><select name="existing"></select></div>
+			<div class="spacer_5"></div>
+			<button existing>Add</button>
+
+			<div class="spacer_20"></div>
+		</div>
+		<div class="new_tab_wrapper">
+			<div>Add this NPC to a new tab.</div>
+			<div><input new_tab/></div>
+			<div class="spacer_5"></div>
+			<button new_tab>Create &amp; Add</button>
+		</div>
+	</div>
+
+	<div template="add_dialog_mob" class="add_dialog_mob">
+		<div class="existing_tab_wrapper">
+			<div>Add these NPCs to one of the existing tabs.</div>
+			<div><select name="existing"></select></div>
+			<div class="spacer_5"></div>
+			<button existing>Add</button>
+
+			<div class="spacer_20"></div>
+		</div>
+		<div class="new_tab_wrapper">
+			<div>Add these NPCs to a new tab.</div>
+			<div><input new_tab/></div>
+			<div class="spacer_5"></div>
+			<button new_tab>Create &amp; Add</button>
+		</div>
+	</div>
+</div>
+</body>
+</html>

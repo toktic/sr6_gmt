@@ -1,0 +1,654 @@
+body
+{
+	background-color: #383838;
+	font-family: "Trebuchet MS", sans-serif;
+	margin: 50px;
+}
+
+@font-face
+{
+	font-family: ShadowrunNormal;
+	src: url("fonts/shadowrun_regular.ttf");
+}
+
+@font-face
+{
+	font-family: ShadowrunItalics;
+	src: url("fonts/shadowrun_italic.ttf");
+}
+
+@font-face
+{
+	font-family: ShadowrunBold;
+	src: url("fonts/shadowrun_bold.ttf");
+}
+
+
+
+.big_button
+{
+	padding: 5px;
+}
+
+.big_button:hover
+{
+}
+
+.smaller_button
+{
+	font-weight: normal;
+	padding: 1px 3px;
+	font-size: 0.7em;
+}
+
+.smaller_button:hover
+{
+	font-weight: normal;
+}
+
+.tiny_button
+{
+	font-weight: normal;
+	padding: 0;
+	font-size: 0.5em;
+}
+
+.tiny_button:hover
+{
+	font-weight: normal;
+}
+
+.top_bar
+{
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	background-color: #383838;
+	height: 90px;
+}
+
+.top_bar .title
+{
+	cursor: pointer;
+	font-size: 28px;
+	font-weight: bold;
+	font-style: normal;
+	color: #fff;
+	margin-top: 24px;
+	margin-left: 24px;
+	font-family: "ShadowrunNormal", Arial, sans-serif;
+}
+
+.top_bar .version
+{
+	color: #fff;
+	margin-left: 24px;
+}
+
+.top_bar .top_bar_roller
+{
+	position: absolute;
+	top: 5px;
+	right: 5px;
+}
+
+.top_bar .top_bar_roller > div
+{
+	display: inline-block;
+	vertical-align: top;
+}
+
+.top_bar .top_bar_roller .edging
+{
+	color: #fff;
+	margin-top: 24px;
+}
+
+.top_bar .top_bar_roller #roll_results
+{
+	background-color: #383838;
+	color: #fff;
+	height: 77px;
+	width: 450px;
+}
+
+.menu
+{
+	position: absolute;
+	top: 90px;
+	left: 0;
+	bottom: 0;
+	width: 250px;
+	background-color: #383838;
+}
+
+.menu button
+{
+	width: 200px;
+	margin-left: 24px;
+	margin-top: 10px;
+}
+
+.main_content
+{
+	position: absolute;
+	top: 90px;
+	bottom: 0;
+	left: 250px;
+	right: 0;
+	background-color: #383838;
+	color: #fff;
+}
+
+.main_content .intro_screen
+{
+	padding-right: 25%;
+	padding-bottom: 20px;
+	font-family: "ShadowrunNormal", Arial, sans-serif;
+}
+
+.main_content .intro_screen .legalese
+{
+	color: #ddd;
+	font-style: italic;
+	margin-top: 40px;
+}
+
+div[template_holder]
+{
+	display: none;
+}
+
+.entry_form
+{
+
+}
+
+.entry_form > .input_row
+{
+	padding-bottom: 2px;
+}
+
+.entry_form > .input_row label
+{
+	display: inline-block;
+}
+.entry_form > .input_row select
+{
+	width: 200px;
+}
+
+.spacer_5
+{
+	height: 5px;
+}
+
+.spacer_10
+{
+	height: 10px;
+}
+
+.spacer_15
+{
+	height: 15px;
+}
+
+.spacer_20
+{
+	height: 20px;
+}
+
+.spacer_25
+{
+	height: 25px;
+}
+
+.spacer_30
+{
+	height: 30px;
+}
+
+.spacer_35
+{
+	height: 35px;
+}
+
+.spacer_40
+{
+	height: 40px;
+}
+
+.spacer_45
+{
+	height: 45px;
+}
+
+.minion_generator_section
+{
+	padding-right: 25px;
+}
+
+.minion_generator_section #overview .intro:not(:first-child)
+{
+	margin-top: 10px;
+}
+
+#minion_generator
+{
+
+}
+
+#minion_generator .entry_form
+{
+
+}
+
+#minion_generator .entry_form #generated_results
+{
+	width: 650px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+#mob_generator .entry_form .input_row > label[equalize]
+{
+	vertical-align: top;
+}
+
+#mob_generator .entry_form #generated_results
+{
+	width: 650px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+#mob_generator .entry_form #generated_results .mob_entry:not(:first-child)
+{
+	margin-top: 10px;
+}
+
+#mob_generator .entry_form .add_special_types
+{
+	display: inline-block;
+}
+
+#mob_generator .entry_form .add_special_types label
+{
+	font-size: 0.75em;
+	display: block;
+	text-align: left;
+}
+
+.display_npc_wrapper
+{
+	border: 1px solid #ccee00;
+	font-size: 0.9em;
+}
+
+.display_npc_wrapper .controls
+{
+	float: right;
+	font-size: 0;
+	margin-top: 2px;
+	margin-right: 2px;
+}
+
+.display_npc_wrapper .controls button
+{
+	margin-left: 1px;
+	margin-right: 1px;
+}
+
+.display_npc_wrapper .npc_name,
+.display_npc_wrapper .npc_description,
+.display_npc_wrapper .npc_notes
+{
+	border-bottom: 1px solid #ccee00;
+	padding: 2px 2px 2px 4px;
+}
+.display_npc_wrapper .attribute_names
+{
+	border-bottom: 1px solid #ccee00;
+	display: flex;
+	font-weight: bold;
+	font-size: 1.1em;
+}
+.display_npc_wrapper .attribute_values
+{
+	border-bottom: 1px solid #ccee00;
+	display: flex;
+}
+
+.display_npc_wrapper .attribute_names .attribute_name,
+.display_npc_wrapper .attribute_values .attribute_value
+{
+	text-align: center;
+	flex-grow: 1;
+	flex-basis: 10%;
+}
+
+.display_npc_wrapper .information > div
+{
+	background-color: #383838;
+	display: table;
+	width: 100%
+}
+
+.display_npc_wrapper .information > div > label
+{
+	padding: 2px;
+	width: 160px;
+	display: table-cell;
+	vertical-align: top;
+	color: #ccee00;
+	background-color: #000;
+	font-weight: bold;
+}
+
+.display_npc_wrapper .information > div > div,
+.display_npc_wrapper .information > div.skills > div > div
+{
+	padding: 2px;
+	display: flex;
+	vertical-align: top;
+}
+
+.display_npc_wrapper .information > div.gear > div,
+.display_npc_wrapper .information > div.skills > div
+{
+	display: table-cell;
+}
+
+.display_npc_wrapper .information > div.skills .skill
+{
+	flex: 3 0 120px;
+	border-bottom: 1px dotted #666;
+}
+
+.display_npc_wrapper .information > div.skills button
+{
+	margin-left: 4px;
+	margin-right: 4px;
+}
+
+.display_npc_wrapper .information > div.skills .result
+{
+	flex: 2 0 40px;
+}
+
+.action_npc_wrapper .information .rollable
+{
+	display: flex;
+}
+
+.action_npc_wrapper .information .rollable > div:not(.result)
+{
+	flex: 3 0 120px;
+}
+
+.action_npc_wrapper .information .rollable > button
+{
+	margin-left: 4px;
+	margin-right: 4px;
+}
+
+.action_npc_wrapper .information .rollable > .result
+{
+	flex: 2 0 40px;
+}
+
+.action_npc_wrapper .information > div > div > button
+{
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+.action_npc_wrapper .information > div > div .result
+{
+	color: #000;
+	background-color: #ccc;
+	min-width: 40px;
+	padding-left: 4px;
+	padding-right: 4px;
+	text-align: center;
+}
+
+.action_npc_wrapper .information > .gear > .value > div
+{
+	display: flex;
+	padding: 2px;
+}
+
+.action_npc_wrapper .information > .gear > .value > div .stats
+{
+	flex: 3 0 120px;
+	border-bottom: 1px dotted #666;
+}
+
+.action_npc_wrapper .information > .gear > .value > div button
+{
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+.action_npc_wrapper .information > .gear > .value > div .result
+{
+	flex: 0 0 40px;
+}
+
+.action_npc_wrapper .information .condition_monitor_combined,
+.action_npc_wrapper .information .condition_monitor_separate
+{
+	width: 100%;
+	display: flex;
+}
+
+.action_npc_wrapper .information .condition_monitor_combined .monitor,
+.action_npc_wrapper .information .condition_monitor_separate .monitor
+{
+	border: 1px solid #999;
+	flex: 3 0 1px;
+	margin-left: 4px;
+}
+
+.action_npc_wrapper .information .condition_monitor_combined .monitor .boxes,
+.action_npc_wrapper .information .condition_monitor_separate .monitor .boxes
+{
+	display: flex;
+}
+
+.action_npc_wrapper .information .condition_monitor_combined .monitor .boxes > div,
+.action_npc_wrapper .information .condition_monitor_separate .monitor .boxes > div
+{
+	background-color: #222;
+	border: 1px solid #333;
+	color: #666;
+	flex: 1 1 1px;
+	text-align: center;
+}
+
+.action_npc_wrapper .information .condition_monitor_combined .monitor .markers,
+.action_npc_wrapper .information .condition_monitor_separate .monitor .markers
+{
+	display: flex;
+}
+
+.action_npc_wrapper .information .condition_monitor_combined .monitor .markers > div,
+.action_npc_wrapper .information .condition_monitor_separate .monitor .markers > div
+{
+	flex: 1 1 1px;
+}
+
+.action_npc_wrapper .information .condition_monitor_combined .penalty,
+.action_npc_wrapper .information .condition_monitor_separate .penalty
+{
+	flex: 2 0 1px;
+	padding-left: 4px;
+	padding-right: 4px;
+}
+
+.edit_npc_wrapper .npc_notes textarea
+{
+	margin: 2px 2px 2px 4px;
+	width: calc(100% - 16px);
+}
+
+.edit_npc_wrapper .npc_notes label,
+.edit_npc_wrapper .other_information > div > label
+{
+	display: block;
+	padding-left: 2px;
+	color: #ccee00;
+	font-weight: bold;
+}
+
+.edit_npc_wrapper .other_information .condition_monitor > div,
+.edit_npc_wrapper .other_information .wound_penalty > div
+{
+	padding-left: 5px;
+}
+
+.edit_npc_wrapper .other_information .skills
+{
+
+}
+
+.edit_npc_wrapper .other_information .skills .value
+{
+	padding-left: 5px;
+}
+
+.edit_npc_wrapper .other_information .skills .value .skill
+{
+	width: 40%;
+	display: inline-block;
+}
+
+.edit_npc_wrapper .other_information .skills .value div.skill_rating
+{
+	width: 7%;
+	display: inline-block;
+}
+
+.edit_npc_wrapper .other_information .skills .value button
+{
+	vertical-align: text-bottom;
+}
+
+.edit_npc_wrapper .other_information .qualities div.quality
+{
+	padding-left: 5px;
+}
+
+.edit_npc_wrapper .other_information .qualities div.quality span.quality
+{
+	width: 40%;
+	display: inline-block;
+}
+
+.edit_npc_wrapper .other_information .augments .value
+{
+	padding-left: 5px;
+}
+
+.edit_npc_wrapper .other_information .augments .value .augmentation
+{
+	width: 40%;
+	display: inline-block;
+}
+
+.edit_npc_wrapper .other_information .augments .value div.augmentation_rating
+{
+	width: 7%;
+	display: inline-block;
+}
+
+.edit_npc_wrapper .other_information .augments .value button
+{
+	vertical-align: text-bottom;
+}
+
+.cast_wrapper
+{
+	padding-right: 25px;
+}
+
+.cast_of_shadows
+{
+
+}
+
+.cast_of_shadows .add_tab_wrapper
+{
+
+}
+
+.cast_of_shadows .add_tab_wrapper button
+{
+	vertical-align: bottom;
+}
+
+.cast_of_shadows .edit_tab_wrapper button
+{
+	vertical-align: bottom;
+}
+
+.cast_of_shadows .cast_tabs
+{
+
+}
+
+.cast_of_shadows .cast__full_list
+{
+
+}
+
+.cast_of_shadows .cast__full_list > div[list]
+{
+
+}
+
+.cast_of_shadows .cast__full_list > div[list] > div
+{
+	display: flex;
+	margin-bottom: 10px;
+}
+
+.cast_of_shadows .cast__full_list > div[list] > div > .entry
+{
+	flex: 1 0 500px;
+}
+
+.cast_of_shadows .cast__full_list > div[list] > div > .tools
+{
+	flex: 2 0 200px;
+	padding-left: 10px;
+}
+
+.cast_of_shadows .cast__full_list > div[list] > div > .tools .add_to_tab
+{
+	padding-left: 4px;
+}
+
+.cast_of_shadows .cast__full_list > div[list] > div > .tools .add_to_tab > div
+{
+	padding: 6px 0;
+}
+
+.cast_of_shadows .cast__tab_list > div[list] > div
+{
+	display: flex;
+	margin-bottom: 10px;
+}
+
+.cast_of_shadows .cast__tab_list > div[list] > div > .entry
+{
+	flex: 1 0 500px;
+}
+
+.cast_of_shadows .cast__tab_list > div[list] > div > .tools
+{
+	flex: 2 0 200px;
+	padding-left: 10px;
+}
