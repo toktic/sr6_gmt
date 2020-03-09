@@ -95,7 +95,7 @@ var db = {
 
 				if (roll.dval(6) === 6)
 				{
-					res.skills.Pistols = 1 + rating;
+					res.skills.Firearms = 1 + rating;
 					res.armor = 'Armor Clothing';
 					res.weapons.push('Defiance EX Shocker');
 				}
@@ -104,16 +104,14 @@ var db = {
 			case 'thug':
 				res.attributes.reaction = 1;
 				res.attributes.strength = 1;
-				res.skills.Blades = 2 + rating;
-				res.skills.Clubs = 2 + rating;
-				res.skills.Intimidation = 2 + rating;
-				res.skills['Unarmed Combat'] = 2 + rating;
+				res.skills.Influence = 2 + rating;
+				res.skills['Close Combat'] = 2 + rating;
 				res.weapons.push('Club');
 				res.weapons.push('Knife');
 
 				if (rating > 4 || roll.dval(3) === 3)
 				{
-					res.skills.Pistols = 1 + rating;
+					res.skills.Firearms = 1 + rating;
 					res.armor = 'Armor Vest';
 
 					if (rating > 3)
@@ -129,12 +127,9 @@ var db = {
 				res.attributes.strength = 2;
 				res.attributes.logic = -1;
 				res.attributes.charisma = 1;
-				res.skills.Blades = 3 + rating;
-				res.skills.Clubs = 2 + rating;
-				res.skills.Etiquette = 2 + rating;
-				res.skills.Intimidation = 3 + rating;
-				res.skills.Pistols = 3 + rating;
-				res.skills['Unarmed Combat'] = 2 + rating;
+				res.skills.Influence = 2 + rating;
+				res.skills.Firearms = 3 + rating;
+				res.skills['Close Combat'] = 2 + rating;
 				res.qualities.positive.push('Toughness');
 				res.armor = 'Armor Vest';
 				res.weapons.push('Knife');
@@ -161,7 +156,7 @@ var db = {
 
 				if (rating > 1 && roll.dval(4) === 4)
 				{
-					res.skills['Throwing Weapons'] = 1 + rating;
+					res.skills.Athletics = 1 + rating;
 					res.gear.push({
 						name: 'Gas Grenade (CS/Tear)',
 						quantity: 2
@@ -169,7 +164,6 @@ var db = {
 				}
 				else if (roll.dval(4) === 4)
 				{
-					res.skills.Longarms = 1 + rating;
 					res.weapons.push('Defiance T-250');
 				}
 
@@ -186,13 +180,11 @@ var db = {
 				res.attributes.logic = -1;
 				res.attributes.intuition = -1;
 				res.attributes.charisma = 1;
-				res.skills.Automatics = 1 + rating;
-				res.skills.Clubs = 1 + rating;
-				res.skills.Etiquette = (rating * 2);
+				res.skills.Influence = (rating * 2);
 				res.skills.Perception = rating;
-				res.skills.Pistols = 2 + rating;
-				res.skills.Running = 3 + Math.floor(rating / 2);
-				res.skills['Unarmed Combat'] = 1 + rating;
+				res.skills.Firearms = 2 + rating;
+				res.skills.Athletics = 3 + Math.floor(rating / 2);
+				res.skills['Close Combat'] = 1 + rating;
 				res.commlink = 3;
 
 				if (rating < 2)
@@ -210,7 +202,7 @@ var db = {
 				}
 				else
 				{
-					res.skills['Throwing Weapons'] = 1 + rating;
+					res.skills.Athletics = 1 + rating;
 					res.weapons.push('FN P93 Praetor');
 					res.weapons.push('Ares Predator V');
 					res.weapons.push('Stun Baton');
@@ -227,13 +219,10 @@ var db = {
 				res.attributes.reaction = 1;
 				res.attributes.logic = -1;
 				res.attributes.intuition = -1;
-				res.skills.Clubs = 2 + rating;
 				res.skills.Perception = rating;
-				res.skills.Pistols = 3 + Math.floor(rating / 2);
-				res.skills.Running = 1 + Math.floor(rating / 2);
-				res.skills['Unarmed Combat'] = 1 + rating;
-				res.knowledge_skills['Law Enforcement'] = 1 + rating;
-				res.knowledge_skills['Local Crime'] = rating;
+				res.skills.Firearms = 3 + Math.floor(rating / 2);
+				res.skills.Athletics = 1 + Math.floor(rating / 2);
+				res.skills['Close Combat'] = 1 + rating;
 				res.armor = 'Armor Jacket';
 				res.weapons.push('Defiance EX Shocker');
 				res.weapons.push('Stun Baton');
@@ -262,12 +251,10 @@ var db = {
 				res.attributes.agility = 1;
 				res.attributes.reaction = 1;
 				res.attributes.strength = 1;
-				res.skills.Automatics = 1 + rating;
-				res.skills.Blades = 1 + rating;
-				res.skills.Intimidation = 2 + rating;
+				res.skills.Firearms = 1 + rating;
+				res.skills.Influence = 2 + rating;
 				res.skills.Perception = Math.floor(rating / 2);
-				res.skills.Pistols = rating;
-				res.skills['Unarmed Combat'] = 2 + rating;
+				res.skills['Close Combat'] = 2 + rating;
 				res.qualities.positive.push('Toughness');
 				res.armor = 'Lined Coat';
 				res.weapons.push('Knife');
@@ -295,7 +282,7 @@ var db = {
 
 				if (roll.dval(3) === 3)
 				{
-					res.skills['Throwing Weapons'] = 1 + rating;
+					res.skills.Athletics = 1 + rating;
 					res.gear.push({
 						name: 'Flashbang',
 						quantity: 2
@@ -313,19 +300,12 @@ var db = {
 				res.attributes.agility = 1;
 				res.attributes.reaction = 1;
 				res.attributes.logic = 1;
-				res.skills.Blades = 2 + rating;
-				res.skills.Clubs = 2 + rating;
-				res.skills['Unarmed Combat'] = 2 + rating;
-				res.skills['Throwing Weapons'] = 2 + rating;
-				res.skills.Gymnastics = 1 + rating;
-				res.skills.Running = 1 + rating;
-				res.skills.Swimming = 1 + rating;
-				res.skills.Etiquette = 3 + Math.ceil(rating / 2);
-				res.skills.Automatics = rating * 2 - 1;
-				res.skills.Longarms = rating * 2 - 1;
-				res.skills.Pistols = rating * 2 - 1;
+				res.skills['Close Combat'] = 2 + rating;
+				res.skills.Athletics = 1 + rating;
+				res.skills.Influence = 3 + Math.ceil(rating / 2);
+				res.skills.Firearms = rating * 2 - 1;
 				res.skills.Perception = 3 + Math.ceil(rating / 2);
-				res.skills.Sneaking = 1 + rating;
+				res.skills.Stealth = 1 + rating;
 				res.weapons.push('Ares Predator V');
 				res.commlink = rating - 1;
 				res.augmentations.push({
@@ -390,20 +370,10 @@ var db = {
 				res.attributes.logic = 1;
 				res.attributes.intuition = 1;
 				res.attributes.charisma = 1;
-				res.skills.Blades = 2 + rating;
-				res.skills.Clubs = 2 + rating;
-				res.skills['Unarmed Combat'] = 2 + rating;
-				res.skills['Throwing Weapons'] = 1 + rating;
-				res.skills.Gymnastics = 1 + rating;
-				res.skills.Running = 1 + rating;
-				res.skills.Swimming = 1 + rating;
-				res.skills.Sneaking = rating;
-				res.skills.Disguise = rating;
-				res.skills.Palming = rating;
-				res.skills.Demolitions = 1 + rating;
-				res.skills.Automatics = rating + 3;
-				res.skills.Longarms = rating + 3;
-				res.skills.Pistols = rating + 3;
+				res.skills['Close Combat'] = 2 + rating;
+				res.skills.Athletics = 1 + rating;
+				res.skills.Stealth = rating;
+				res.skills.Firearms = rating + 3;
 				res.skills.Perception = 1 + rating;
 				res.gear.push({
 					name: 'Grapple Gun'
@@ -476,28 +446,27 @@ var db = {
 				res.attributes.logic = 1;
 				res.attributes.intuition = 1;
 				res.attributes.will = 2;
-				res.skills.Blades = 1 + rating;
-				res.skills.Clubs = 1 + rating;
-				res.skills.Running = 1 + rating;
+				res.skills['Close Combat'] = 1 + rating;
+				res.skills.Athletics = 1 + rating;
 				res.skills.Perception = 1 + rating;
-				res.skills.Intimidation = 2 + rating;
+				res.skills.Influence = 2 + rating;
 				res.weapons.push('Club');
 				res.weapons.push('Knife');
 
 				if (roll.dval(3) === 3)
 				{
-					res.skills.Longarms = 1 + rating;
+					res.skills.Firearms = 1 + rating;
 					res.weapons.push('Defiance T-250');
 				}
 				else if (roll.dval(3) === 3)
 				{
-					res.skills.Automatics = 1 + rating;
+					res.skills.Firearms = 1 + rating;
 					res.weapons.push('Steyr TMP');
 				}
 
 				if (rating > 1)
 				{
-					res.skills['Throwing Weapons'] = 1 + rating;
+					res.skills.Athletics = 1 + rating;
 
 					if (roll.dval(2) === 2)
 					{
@@ -519,7 +488,7 @@ var db = {
 			case 'cast':
 				// Special case for when the special adjustments matter more than the type adjustments
 				res.attributes.charisma = 1;
-				res.skills.Etiquette = 2 + rating;
+				res.skills.Influence = 2 + rating;
 				break;
 		}
 
@@ -554,7 +523,7 @@ var db = {
 				case 'civilian':
 					res.professional_description = 'Civilian';
 					res.attributes.will = 1;
-					res.skills.Leadership = 3;
+					res.skills.Influence = 3;
 					break;
 
 				case 'thug':
@@ -562,10 +531,9 @@ var db = {
 					res.attributes.agility = 1;
 					res.attributes.strength = 1;
 					res.attributes.logic = 1;
-					res.skills.Clubs = 1;
-					res.skills.Intimidation = 2;
-					res.skills.Pistols = 3;
-					res.skills['Unarmed Combat'] = 1;
+					res.skills.Influence = 2;
+					res.skills.Firearms = 3;
+					res.skills['Close Combat'] = 1;
 					res.weapons.push('Colt America L36');
 					break;
 
@@ -576,9 +544,8 @@ var db = {
 					res.attributes.logic = 1;
 					res.attributes.intuition = 1;
 					res.attributes.charisma = 1;
-					res.skills.Etiquette = 3 + rating;
-					res.skills.Leadership = 2;
-					res.skills['Unarmed Combat'] = 3 + rating;
+					res.skills.Influence = 3 + rating;
+					res.skills['Close Combat'] = 3 + rating;
 					res.augmentations.push({name:'Cyber Spur'});
 					res.armor = 'Armor Jacket';
 					break;
@@ -588,11 +555,10 @@ var db = {
 					res.attributes.agility = 1;
 					res.attributes.logic = 1;
 					res.attributes.intuition = 1;
-					res.skills.Clubs = 1 + rating;
+					res.skills['Close Combat'] = 1 + rating;
 					res.skills.Perception = 2 + rating;
-					res.skills.Leadership = 1 + rating;
-					res.skills.Sneaking = rating;
-					res.skills.Intimidation = 1 + rating;
+					res.skills.Influence = 1 + rating;
+					res.skills.Stealth = rating;
 					res.gear.push({
 						name: 'Goggles',
 						rating: 2,
@@ -610,14 +576,11 @@ var db = {
 					res.attributes.logic = 1;
 					res.attributes.intuition = 1;
 					res.attributes.charisma = 1;
-					res.skills.Automatics = 1 + rating;
-					res.skills.Blades = 3 + rating;
-					res.skills.Clubs = 3 + rating;
-					res.skills['Unarmed Combat'] = 3 + rating;
+					res.skills.Firearms = 1 + rating;
+					res.skills['Close Combat'] = 3 + rating;
 					res.skills.Perception = 2 + rating;
-					res.skills.Leadership = 2 + rating;
-					res.skills.Sneaking = rating;
-					res.skills.Intimidation = 1 + rating;
+					res.skills.Stealth = rating;
+					res.skills.Influence = 1 + rating;
 					res.augmentations.push({
 						name: 'Cybereyes',
 						rating: 2,
@@ -631,9 +594,8 @@ var db = {
 					res.attributes.will = 1;
 					res.attributes.logic = 1;
 					res.attributes.charisma = 1;
-					res.skills.Etiquette = 3 + rating;
-					res.skills.Leadership = 2;
-					res.skills['Unarmed Combat'] = 3 + rating;
+					res.skills.Influence = 3 + rating;
+					res.skills['Close Combat'] = 3 + rating;
 					res.armor = 'Armor Jacket';
 					res.augmentations.push({name:'Cyber Spur'});
 					res.gear.push({
@@ -652,7 +614,7 @@ var db = {
 					res.attributes.reaction = 1;
 					res.attributes.strength = 1;
 					res.attributes.will = 1;
-					res.skills['Heavy Weapons'] = 3 + rating;
+					res.skills['Exotic Ranged Weapons'] = 3 + rating;
 					res.skills.Demolitions = rating;
 					break;
 
@@ -662,7 +624,6 @@ var db = {
 					res.attributes.strength = 1;
 					res.attributes.logic = 1;
 					res.attributes.will = 1;
-					res.skills.Demolitions = 2 + rating;
 					res.qualities.positive.push('Toughness');
 					res.weapons.push('Enfield AS-7');
 					break;
@@ -672,7 +633,7 @@ var db = {
 					res.attributes.body = 2;
 					res.attributes.intuition = 1;
 					res.attributes.charisma = 2;
-					res.skills.Automatics = rating;
+					res.skills.Firearms = rating;
 					res.weapons.push('Steyr TMP');
 					break;
 			}
@@ -681,40 +642,34 @@ var db = {
 		if (special_type === 'Adept')
 		{
 			// What kind of adept?
-			var improved_skill, bonus_weapon;
+			var improved_skill = 'Firearms', bonus_weapon;
 
 			switch (options.professional_type)
 			{
 				default:
 				case 'civilian':
 				case 'police':
-					improved_skill = 'Pistols';
 					bonus_weapon = 'Remington Roomsweeper';
 					break;
 
 				case 'cultist':
 				case 'ganger':
-					improved_skill = 'Longarms';
 					bonus_weapon = 'Enfield AS-7';
 					break;
 
 				case 'corpsec':
-					improved_skill = 'Automatics';
 					bonus_weapon = 'FN HAR';
 					break;
 
 				case 'mob':
-					improved_skill = 'Automatics';
 					bonus_weapon = 'AK-97';
 					break;
 
 				case 'htr':
-					improved_skill = 'Automatics';
 					bonus_weapon = 'FN P93 Praetor';
 					break;
 
 				case 'specops':
-					improved_skill = 'Longarms';
 					bonus_weapon = 'Cavalier Arms Crockett EBR';
 			}
 
@@ -723,10 +678,9 @@ var db = {
 			res.attributes.strength = 1;
 
 			// Skills
-			res.skills.Arcana = rating + 2;
-			res.skills.Blades = rating + 2;
-			res.skills.Clubs = rating + 2;
-			res.skills[improved_skill] = rating + 2;
+			res.skills.Astral = rating + 2;
+			res.skills['Close Combat'] = rating + 2;
+			res.skills.Firearms = rating + 2;
 
 			// Qualities
 			res.qualities.positive.push('Adept');
@@ -942,13 +896,9 @@ var db = {
 			res.attributes.logic = 1;
 
 			// Skills
-			res.skills.Assessing = rating + 2;
-			res.skills['Astral Combat'] = rating + 1;
-			res.skills.Summoning = rating + 1;
-			res.skills.Banishing = rating + 1;
-			res.skills.Binding = rating + 1;
-			res.skills.Counterspelling = rating + 2;
-			res.skills.Spellcasting = rating + 2;
+			res.skills.Astral = rating + 2;
+			res.skills.Conjuring = rating + 1;
+			res.skills.Sorcery = rating + 2;
 
 			// Qualities
 			res.qualities.positive.push('Magician (Hermetic)');
@@ -1030,16 +980,13 @@ var db = {
 			}
 
 			// Skills
-			res.skills.Computer = rating + 1;
-			res.skills.Cybercombat = rating + 2;
-			res.skills['Electronic Warfare'] = rating + 2;
-			res.skills.Hacking = rating + 2;
+			res.skills.Cracking = rating + 2;
 
 			if (['corpsec', 'htr', 'mob', 'specops'].includes(options.professional_type))
 			{
-				res.skills.Leadership = rating;
-				res.skills.Hardware = rating + 1;
-				res.skills.Software = rating + 1;
+				res.skills.Influence = rating;
+				res.skills.Cracking = rating + 1;
+				res.skills.Electronics = rating + 1;
 			}
 
 			if (['htr', 'specops'].includes(options.professional_type))
@@ -1129,11 +1076,9 @@ var db = {
 				res.armor = 'Actioneer Business Clothes';
 
 			// Skills
-			res.skills.Computer = rating + 1;
+			res.skills.Electronics = rating + 1;
 			res.skills.Con = rating + 1;
-			res.skills.Etiquette = Math.max(2, rating * 2) - 1;
-			res.skills.Intimidation = rating + 3;
-			res.skills.Negotiation = Math.max(2, rating * 2);
+			res.skills.Influence = Math.max(2, rating * 2);
 			res.skills.Perception = rating + 2;
 		}
 
@@ -1163,11 +1108,10 @@ var db = {
 				res.armor = 'Armor Jacket';
 
 			// Skills
-			res.skills.Pistols = rating + 4;
-			res.skills.Gymnastics = rating + 2;
+			res.skills.Firearms = rating + 4;
+			res.skills.Athletics = rating + 2;
 			res.skills.Perception = rating + 2;
-			res.skills.Running = rating + 2;
-			res.skills.Sneaking = rating + 2;
+			res.skills.Stealth = rating + 2;
 
 			// Weapons, Augmentations & Drugs
 			res.gear.push(this.get_gear('Jazz'));
@@ -1185,7 +1129,7 @@ var db = {
 			switch (options.race)
 			{
 				case 'Human':
-					res.skills['Throwing Weapons'] = rating + 3;
+					res.skills.Athletics = rating + 3;
 					if (rating < 2)
 					{
 						res.weapons.push(this.get_weapon('Browning Ultra-Power'));
@@ -1216,8 +1160,6 @@ var db = {
 					break;
 
 				case 'Dwarf':
-					res.skills.Longarms = rating + 4;
-
 					if (rating < 2)
 					{
 						res.weapons.push(this.get_weapon('Defiance T-250'));
@@ -1238,7 +1180,7 @@ var db = {
 					break;
 
 				case 'Troll':
-					res.skills.Automatics = rating + 4;
+					res.skills.Firearms = rating + 4;
 					if (rating < 2)
 					{
 						res.weapons.push(this.get_weapon('Steyr TMP'));
@@ -1262,29 +1204,28 @@ var db = {
 			res.attributes.strength = 1;
 
 			// Skills
-			res.skills.Automatics = rating + 3;
-			res.skills.Blades = rating + 2;
+			res.skills.Firearms = rating + 3;
+			res.skills['Close Combat'] = rating + 2;
 			res.skills.Perception = rating + 2;
-			res.skills.Running = rating + 2;
-			res.skills.Sneaking = rating + 2;
+			res.skills.Athletics = rating + 2;
+			res.skills.Stealth = rating + 2;
 
 			switch (options.race)
 			{
 				case 'Human':
 					res.attributes.reaction = 2;
-					res.skills.Demolitions = rating + 1;
-					res.skills['Unarmed Combat'] = rating + 3;
+					res.skills['Close Combat'] = rating + 1;
 					break;
 
 				case 'Elf':
 					res.attributes.reaction = 2;
-					res.skills.Gymnastics = rating + 1;
-					res.skills.Negotiations = rating + 1;
+					res.skills.Athletics = rating + 1;
+					res.skills.Influence = rating + 1;
 					break;
 
 				case 'Dwarf':
-					res.skills['First Aid'] = rating + 3;
-					res.skills['Throwing Weapons'] = rating + 3;
+					res.skills.Biotech = rating + 3;
+					res.skills.Athletics = rating + 3;
 					if (rating < 3)
 					{
 						res.gear.push(this.get_gear('Smoke Grenade'));
@@ -1298,13 +1239,13 @@ var db = {
 					break;
 
 				case 'Ork':
-					res.skills.Intimidation = rating + 2;
-					res.skills['Heavy Weapons'] = rating + 2;
+					res.skills.Influence = rating + 2;
+					res.skills['Exotic Ranged Weapons'] = rating + 2;
 					break;
 
 				case 'Troll':
-					res.skills.Intimidation = rating + 3;
-					res.skills['Heavy Weapons'] = rating + 3;
+					res.skills.Influence = rating + 3;
+					res.skills['Exotic Ranged Weapons'] = rating + 3;
 					break;
 			}
 
@@ -1558,13 +1499,11 @@ var db = {
 			res.attributes.strength = 2;
 
 			// Skills
-			res.skills.Clubs = rating + 2;
-			res.skills.Longarms = rating + 2;
-			res.skills.Pistols = rating + 2;
+			res.skills['Close Combat'] = rating + 2;
+			res.skills.Firearms = rating + 2;
 
 			if (rating > 3)
 			{
-				res.skills['Unarmed'] = rating + 2;
 				res.augmentations.push(this.get_augmentation('Cyber Spur'));
 			}
 			// Qualities
@@ -1655,13 +1594,9 @@ var db = {
 			res.attributes.charisma = 1;
 
 			// Skills
-			res.skills.Assessing = rating + 2;
-			res.skills['Astral Combat'] = rating + 3;
-			res.skills.Summoning = rating + 2;
-			res.skills.Banishing = rating + 2;
-			res.skills.Binding = rating + 2;
-			res.skills.Counterspelling = rating + 2;
-			res.skills.Spellcasting = rating + 1;
+			res.skills.Astral = rating + 2;
+			res.skills.Conjuring = rating + 2;
+			res.skills.Sorcery = rating + 2;
 
 			// Qualities
 			res.qualities.positive.push('Magician (Shaman)');
@@ -1871,48 +1806,26 @@ var db = {
 	get_skill_list: function()
 	{
 		return [
-			'Arcana',
-			'Assessing',
-			'Astral Combat',
-			'Automatics',
-			'Banishing',
-			'Binding',
-			'Blades',
-			'Clubs',
-			'Computer',
+			'Astral',
+			'Athletics',
+			'Biotech',
+			'Close Combat',
 			'Con',
-			'Counterspelling',
-			'Cybercombat',
-			'Demolitions',
-			'Disguise',
-			'Electronic Warfare',
-			'Etiquette',
-			'First Aid',
-			'Gunnery',
-			'Gymnastics',
-			'Hacking',
-			'Hardware',
-			'Heavy Weapons',
-			'Impersonation',
-			'Intimidation',
-			'Leadership',
-			'Longarms',
-			'Navigation',
-			'Negotiation',
-			'Palming',
+			'Conjuring',
+			'Cracking',
+			'Electronics',
+			'Enchanting',
+			'Engineering',
+			'Exotic Melee Weapons',
+			'Exotic Ranged Weapons',
+			'Firearms',
+			'Influence',
+			'Outdoors',
 			'Perception',
-			'Pilot Aircraft',
-			'Pilot Ground Craft',
-			'Pistols',
-			'Running',
-			'Sneaking',
-			'Software',
-			'Spellcasting',
-			'Summoning',
-			'Swimming',
-			'Throwing Weapons',
-			'Tracking',
-			'Unarmed Combat'
+			'Piloting',
+			'Sorcery',
+			'Stealth',
+			'Tasking'
 		];
 	},
 
@@ -2063,7 +1976,7 @@ var db = {
 		{
 			name: 'Combat Axe',
 			type: 'Melee',
-			ability: 'Blades',
+			ability: 'Close Combat',
 			acc: 4,
 			dv: 5,
 			damage_attribute: 'strength',
@@ -2073,7 +1986,7 @@ var db = {
 		{
 			name: 'Combat Knife',
 			type: 'Melee',
-			ability: 'Blades',
+			ability: 'Close Combat',
 			acc: 6,
 			dv: 2,
 			damage_attribute: 'strength',
@@ -2083,7 +1996,7 @@ var db = {
 		{
 			name: 'Knife',
 			type: 'Melee',
-			ability: 'Blades',
+			ability: 'Close Combat',
 			acc: 5,
 			dv: 1,
 			damage_attribute: 'strength',
@@ -2093,7 +2006,7 @@ var db = {
 		{
 			name: 'Katana',
 			type: 'Melee',
-			ability: 'Blades',
+			ability: 'Close Combat',
 			acc: 7,
 			dv: 3,
 			damage_attribute: 'strength',
@@ -2104,7 +2017,7 @@ var db = {
 		{
 			name: 'Sword',
 			type: 'Melee',
-			ability: 'Blades',
+			ability: 'Close Combat',
 			acc: 6,
 			dv: 3,
 			damage_attribute: 'strength',
@@ -2115,7 +2028,7 @@ var db = {
 		{
 			name: 'Cyber Spur',
 			type: 'Melee',
-			ability: 'Unarmed Combat',
+			ability: 'Close Combat',
 			acc: 'Physical',
 			dv: 3,
 			damage_attribute: 'strength',
@@ -2125,7 +2038,7 @@ var db = {
 		{
 			name: 'Club',
 			type: 'Melee',
-			ability: 'Clubs',
+			ability: 'Close Combat',
 			acc: 4,
 			dv: 3,
 			damage_attribute: 'strength',
@@ -2135,7 +2048,7 @@ var db = {
 		{
 			name: 'Stun Baton',
 			type: 'Melee',
-			ability: 'Clubs',
+			ability: 'Close Combat',
 			acc: 4,
 			dv: 9,
 			damage_type: 'S(e)',
@@ -2146,7 +2059,7 @@ var db = {
 		{
 			name: 'Staff',
 			type: 'Melee',
-			ability: 'Clubs',
+			ability: 'Close Combat',
 			acc: 6,
 			dv: 3,
 			damage_attribute: 'strength',
@@ -2156,7 +2069,7 @@ var db = {
 		{
 			name: 'Telescoping Staff',
 			type: 'Melee',
-			ability: 'Clubs',
+			ability: 'Close Combat',
 			acc: 4,
 			dv: 2,
 			damage_attribute: 'strength',
@@ -2166,7 +2079,7 @@ var db = {
 		{
 			name: 'Defiance EX Shocker',
 			type: 'Taser',
-			ability: 'Pistols',
+			ability: 'Firearms',
 			acc: 4,
 			dv: 9,
 			damage_type: 'S(e)',
@@ -2179,7 +2092,7 @@ var db = {
 		{
 			name: 'Streetline Special',
 			type: 'Hold-out Pistol',
-			ability: 'Pistols',
+			ability: 'Firearms',
 			acc: 4,
 			dv: 6,
 			modes: 'SA',
@@ -2190,7 +2103,7 @@ var db = {
 		{
 			name: 'Colt America L36',
 			type: 'Light Pistol',
-			ability: 'Pistols',
+			ability: 'Firearms',
 			acc: 7,
 			dv: 7,
 			modes: 'SA',
@@ -2201,7 +2114,7 @@ var db = {
 		{
 			name: 'Fichetti Security 600',
 			type: 'Light Pistol',
-			ability: 'Pistols',
+			ability: 'Firearms',
 			acc: 6,
 			acc_modified: 7,
 			dv: 7,
@@ -2214,7 +2127,7 @@ var db = {
 		{
 			name: 'Ares Predator V',
 			type: 'Heavy Pistol',
-			ability: 'Pistols',
+			ability: 'Firearms',
 			acc: 5,
 			acc_modified: 7,
 			dv: 8,
@@ -2227,7 +2140,7 @@ var db = {
 		{
 			name: 'Browning Ultra-Power',
 			type: 'Heavy Pistol',
-			ability: 'Pistols',
+			ability: 'Firearms',
 			acc: 5,
 			acc_modified: 6,
 			dv: 8,
@@ -2240,7 +2153,7 @@ var db = {
 		{
 			name: 'Remington Roomsweeper',
 			type: 'Heavy Pistol',
-			ability: 'Pistols',
+			ability: 'Firearms',
 			acc: 4,
 			dv: 7,
 			ap: -1,
@@ -2252,7 +2165,7 @@ var db = {
 		{
 			name: 'Ceska Black Scorpion',
 			type: 'Machine Pistol',
-			ability: 'Automatics',
+			ability: 'Firearms',
 			acc: 5,
 			dv: 6,
 			modes: 'SA/BF',
@@ -2264,7 +2177,7 @@ var db = {
 		{
 			name: 'Steyr TMP',
 			type: 'Machine Pistol',
-			ability: 'Automatics',
+			ability: 'Firearms',
 			acc: 4,
 			dv: 7,
 			modes: 'SA/BF/FA',
@@ -2275,7 +2188,7 @@ var db = {
 		{
 			name: 'Colt Cobra TZ-120',
 			type: 'SMG',
-			ability: 'Automatics',
+			ability: 'Firearms',
 			acc: 4,
 			acc_modified: 5,
 			dv: 7,
@@ -2289,7 +2202,7 @@ var db = {
 		{
 			name: 'FN P93 Praetor',
 			type: 'SMG',
-			ability: 'Automatics',
+			ability: 'Firearms',
 			acc: 6,
 			dv: 8,
 			modes: 'SA/BF/FA',
@@ -2302,7 +2215,7 @@ var db = {
 		{
 			name: 'HK-227',
 			type: 'SMG',
-			ability: 'Automatics',
+			ability: 'Firearms',
 			acc: 5,
 			acc_modified: 7,
 			dv: 7,
@@ -2315,7 +2228,7 @@ var db = {
 		{
 			name: 'AK-97',
 			type: 'Assault Rifle',
-			ability: 'Automatics',
+			ability: 'Firearms',
 			acc: 5,
 			dv: 10,
 			ap: -2,
@@ -2327,7 +2240,7 @@ var db = {
 		{
 			name: 'Ares Alpha',
 			type: 'Assault Rifle',
-			ability: 'Automatics',
+			ability: 'Firearms',
 			acc: 5,
 			acc_modified: 7,
 			dv: 11,
@@ -2341,7 +2254,7 @@ var db = {
 		{
 			name: 'FN HAR',
 			type: 'Assault Rifle',
-			ability: 'Automatics',
+			ability: 'Firearms',
 			acc: 5,
 			acc_modified: 6,
 			dv: 10,
@@ -2355,7 +2268,7 @@ var db = {
 		{
 			name: 'Cavalier Arms Crockett EBR',
 			type: 'Sniper Rifle',
-			ability: 'Longarms',
+			ability: 'Firearms',
 			acc: 6,
 			dv: 12,
 			ap: -3,
@@ -2368,7 +2281,7 @@ var db = {
 		{
 			name: 'Defiance T-250',
 			type: 'Shotgun',
-			ability: 'Longarms',
+			ability: 'Firearms',
 			acc: 4,
 			dv: 10,
 			ap: -1,
@@ -2380,7 +2293,7 @@ var db = {
 		{
 			name: 'Enfield AS-7',
 			type: 'Shotgun',
-			ability: 'Longarms',
+			ability: 'Firearms',
 			acc: 4,
 			acc_modified: 5,
 			dv: 13,
@@ -2393,7 +2306,7 @@ var db = {
 		{
 			name: 'Ingram Valiant',
 			type: 'LMG',
-			ability: 'Heavy Weapons',
+			ability: 'Exotic Ranged Weapons',
 			acc: 5,
 			acc_modified: 6,
 			dv: 9,
@@ -2406,7 +2319,7 @@ var db = {
 		{
 			name: 'Panther XXL',
 			type: 'Assault Cannon',
-			ability: 'Heavy Weapons',
+			ability: 'Exotic Ranged Weapons',
 			acc: 5,
 			acc_modified: 7,
 			dv: 17,
@@ -2434,7 +2347,7 @@ var db = {
 		var data = {
 			name: name, // Display name of the weapon: Knife, Ares Predator V, etc.
 			type: '', // Display type of the weapon: Light Pistol, SMG, etc.
-			ability: '', // Linked ability: Blades, Automatics, etc.
+			ability: '', // Linked ability: Close Combat, Firearms, etc.
 			acc: '',
 			acc_modified: null, // Modifier to conditionally apply due to smartlink, laser sight, etc.
 			dv: '', // Damage Value
@@ -2558,91 +2471,51 @@ var db = {
 
 		switch (skill)
 		{
-			// Weapon based skills
-			case 'Automatics':
-			case 'Blades':
-			case 'Clubs':
-			case 'Heavy Weapons':
-			case 'Longarms':
-			case 'Pistols':
-				data.attribute = 'agility';
-				data.limit = 'gear';
-				break;
-
-			// Strength based skills
-			case 'Running':
-			case 'Swimming':
-				data.attribute = 'strength';
-				data.limit = 'physical';
-				break;
-
 			// Agility based skills
-			case 'Gunnery':
-			case 'Gymnastics':
-			case 'Palming':
-			case 'Sneaking':
-			case 'Unarmed Combat':
-			case 'Throwing Weapons':
+			case 'Athletics':
+			case 'Close Combat':
+			case 'Exotic Melee Weapons':
+			case 'Exotic Ranged Weapons':
+			case 'Firearms':
+			case 'Stealth':
 				data.attribute = 'agility';
-				data.limit = 'physical';
 				break;
 
 			// Reaction based skills
-			case 'Pilot Ground Craft':
-			case 'Pilot Aircraft':
+			case 'Piloting':
 				data.attribute = 'reaction';
-				data.limit = 'gear';
 				break;
 
 			// Charisma based social skills
 			case 'Con':
-			case 'Etiquette':
-			case 'Intimidation':
-			case 'Leadership':
-			case 'Negotiation':
-			case 'Impersonation':
+			case 'Influence':
 				data.attribute = 'charisma';
-				data.limit = 'social';
 				break;
 
 			// Logic based skills
-			case 'Arcana':
-			case 'Computer':
-			case 'Demolitions':
-			case 'Cybercombat':
-			case 'Electronic Warfare':
-			case 'First Aid':
-			case 'Hacking':
-			case 'Hardware':
-			case 'Software':
+			case 'Biotech':
+			case 'Cracking':
+			case 'Electronics':
+			case 'Engineering':
 				data.attribute = 'logic';
-				data.limit = 'mental';
 				break;
 
 			// Intuition based mental skills
-			case 'Disguise':
-			case 'Navigation':
+			case 'Outdoors':
 			case 'Perception':
-			case 'Tracking':
 				data.attribute = 'intuition';
-				data.limit = 'mental';
 				break;
 
 			// Willpower based skills
-			case 'Astral Combat':
+			case 'Astral':
 				data.attribute = 'will';
-				data.limit = 'astral';
 				break;
 
 			// Magic based skills
-			case 'Assessing':
-			case 'Banishing':
-			case 'Binding':
-			case 'Counterspelling':
-			case 'Spellcasting':
-			case 'Summoning':
+			case 'Conjuring':
+			case 'Enchanting':
+			case 'Sorcery':
 				data.attribute = 'magic';
-				data.limit = 'force';
 				break;
 
 			default:
