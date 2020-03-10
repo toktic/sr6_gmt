@@ -911,28 +911,6 @@ var render = {
 		// Condition Monitor
 		$mook.find('.information .condition_monitor').append(render.get_condition_monitor(wp, data));
 
-		// Limits
-		var limits = this.calc_limits(data.attributes, augmented_attributes);
-
-		var limit_display = '';
-
-		if (limits.physical === limits.physical_aug)
-			limit_display += 'Physical ' + limits.physical + ', ';
-		else
-			limit_display += 'Physical ' + limits.physical + ' (' + limits.physical_aug + '), ';
-
-		if (limits.mental === limits.mental_aug)
-			limit_display += 'Mental ' + limits.mental + ', ';
-		else
-			limit_display += 'Mental ' + limits.mental + ' (' + limits.mental_aug + '), ';
-
-		if (limits.social === limits.social_aug)
-			limit_display += 'Social ' + limits.social;
-		else
-			limit_display += 'Social ' + limits.social + ' (' + limits.social_aug + ')';
-
-		$mook.find('.information .limits .value').html(limit_display);
-
 		// Qualities
 		if (data.qualities.positive.length === 0 && data.qualities.negative.length === 0)
 		{
@@ -954,7 +932,7 @@ var render = {
 		}
 
 		// Skills
-		var improved_skills = [], improved_rating = 0, $skill, skill, skill_data, skill_limit, power_focus;
+		var improved_skills = [], improved_rating = 0, $skill, skill, skill_data, power_focus;
 
 		power_focus = data.gear.find(function (gear)
 		{
@@ -989,44 +967,24 @@ var render = {
 			skill_data = db.get_skill_attributes(skill);
 
 			$skill.prop('pool', (data.skills[skill] + augmented_attributes[skill_data.attribute]));
-			$skill.prop('limit', skill_data.limit);
 
 			// Magic-based skills
-			if (skill_data.limit === 'force')
+			// TODO need a different way to determine the pool for magic skills
+			if (skill_data.attribute === 'magic')
 				$skill.prop('pool', (data.skills[skill] + data.special.Magic));
 
-			if (skill_data.limit === 'force')
-			{
-				$skill.prop('limit', data.special.Magic);
-				skill_limit = data.special.Magic;
-			}
-			else if (skill_data.limit === 'gear')
-			{
-				skill_limit = 'Gear';
-			}
-			else if (limits.hasOwnProperty(skill_data.limit))
-			{
-				$skill.prop('limit', limits[skill_data.limit]);
-				skill_limit = limits[skill_data.limit];
-
-				if (limits.hasOwnProperty(skill_data.limit + '_aug'))
-				{
-					$skill.prop('limit', limits[skill_data.limit + '_aug']);
-					skill_limit = limits[skill_data.limit + '_aug'];
-				}
-			}
-
-			$skill.find('.skill').html(skill + ' ' + data.skills[skill] + ' [' + skill_limit + ']');
+			$skill.find('.skill').html(skill + ' ' + data.skills[skill]);
 			$skill.prop('skill', skill);
 
 			if (improved_skills.includes(skill))
 			{
 				var improved_skill_rating = data.skills[skill] + improved_rating;
 				$skill.prop('pool', data.skills[skill] + augmented_attributes[skill_data.attribute] + improved_rating);
-				$skill.find('.skill').html(skill + ' ' + data.skills[skill] + ' (' + improved_skill_rating + ') [' + skill_limit + ']');
+				$skill.find('.skill').html(skill + ' ' + data.skills[skill] + ' (' + improved_skill_rating + ')');
 			}
 
-			if ((skill_data.limit === 'force' || skill_data.limit === 'astral') && power_focus !== undefined)
+			// TODO need a different way to determine the pool for magic skills
+			if ((skill_data.attribute === 'magic') && power_focus !== undefined)
 			{
 				$skill.prop('pool', $skill.prop('pool') + power_focus.rating);
 			}
@@ -1047,9 +1005,6 @@ var render = {
 					i = roll.d(d + wp.penalty);
 					total = i.hits;
 				}
-
-				if (total > $skill.prop('limit') && !isNaN($skill.prop('limit')))
-					total = $skill.prop('limit');
 
 				if (i.glitch)
 					total += ', glitch';
@@ -1108,26 +1063,19 @@ var render = {
 		}
 
 		// Armor & Damage Resistance
-		// The PQ Toughness grants 1 bonus soak die
-		var soak = (data.qualities.positive.includes('Toughness')) ? 1 : 0;
-
-		soak += parseInt(augmented_attributes.body);
+		var soak = parseInt(augmented_attributes.body);
 
 		data.augmentations.forEach(function(aug)
 		{
-			if (aug.name === 'Troll Dermal Deposits')
-				soak++;
-
-			if (aug.type === 'full cyberlimb')
+			if (aug.name === 'Bone Lacing')
 			{
-				if (aug.bonus_armor > 0)
-					soak += aug.bonus_armor;
+				if (aug.rating == 1)
+					soak += 1;
+				else
+					soak += 2;
 			}
 
-			if (aug.name === 'Bone Lacing')
-				soak += (aug.rating * 2);
-
-			if (aug.name === 'Orthoskin' || aug.name === 'Dermal Plating' || aug.name === 'Bone Density Augmentation')
+			if (aug.name === 'Bone Density Augmentation')
 				soak += aug.rating;
 		});
 
@@ -1139,7 +1087,6 @@ var render = {
 			{
 				armor = armors[data.armor];
 				$mook.find('.information .armor .value').html(data.armor + ' (' + armor + ')');
-				soak += armor;
 			}
 		}
 		else
@@ -1200,10 +1147,10 @@ var render = {
 			if (entry.hasOwnProperty('force'))
 				entry_text.push('Force ' + entry.force);
 
-			if (entry.acc_modified !== null)
-				entry_text.push('Acc ' + entry.acc + ' (' + entry.acc_modified + ')');
-			else
-				entry_text.push('Acc ' + entry.acc);
+			// if (entry.acc_modified !== null)
+			// 	entry_text.push('Acc ' + entry.acc + ' (' + entry.acc_modified + ')');
+			// else
+			// 	entry_text.push('Acc ' + entry.acc);
 
 			entry_text.push('Reach ' + entry.reach);
 
@@ -1212,8 +1159,9 @@ var render = {
 			else
 				entry_text.push('DV ' + entry.dv + entry.damage_type);
 
-			if (entry.ap !== 0)
-				entry_text.push('AP ' + entry.ap);
+			entry_text.push('AR ' + entry.ar);
+			// if (entry.ap !== 0)
+			// 	entry_text.push('AP ' + entry.ap);
 
 			$gear = render.get_template('display_weapon').appendTo($mook.find('.information .gear .value'));
 
@@ -1233,10 +1181,6 @@ var render = {
 			if (entry.hasOwnProperty('force'))
 				$gear.prop('pool', $gear.prop('pool') + entry.force);
 
-			$gear.prop('limit', entry.acc);
-			if (entry.acc_modified !== null)
-				$gear.prop('limit', entry.acc_modified);
-
 			$gear.find('button').button().click(function ()
 			{
 				var $gear = $(this).parent();
@@ -1253,9 +1197,6 @@ var render = {
 					i = roll.d(d + wp.penalty);
 					total = i.hits;
 				}
-
-				if (total > $gear.prop('limit') && !isNaN($gear.prop('limit')))
-					total = $gear.prop('limit');
 
 				if (i.glitch)
 					total += ',g';
@@ -1281,11 +1222,6 @@ var render = {
 
 			entry_text = [entry.ability];
 
-			if (limits.physical === limits.physical_aug)
-				entry_text.push('Acc ' + limits.physical);
-			else
-				entry_text.push('Acc ' + limits.physical + ' (' + limits.physical_aug + ')');
-
 			entry_text.push('Reach ' + entry.reach);
 
 			if (entry.damage_attribute === 'strength')
@@ -1293,8 +1229,9 @@ var render = {
 			else
 				entry_text.push('DV ' + entry.dv + entry.damage_type);
 
-			if (entry.ap !== 0)
-				entry_text.push('AP ' + entry.ap);
+			// if (entry.ap !== 0)
+			// 	entry_text.push('AP ' + entry.ap);
+			entry_text.push('AR ' + entry.ar);
 
 			$gear = render.get_template('display_weapon').appendTo($mook.find('.information .gear .value'));
 
@@ -1310,10 +1247,6 @@ var render = {
 			{
 				$gear.prop('pool', (augmented_attributes.agility - 1));
 			}
-
-			$gear.prop('limit', entry.acc);
-			if (entry.acc_modified !== null)
-				$gear.prop('limit', entry.acc_modified);
 
 			$gear.find('button').button().click(function ()
 			{
@@ -1332,9 +1265,6 @@ var render = {
 					total = i.hits;
 				}
 
-				if (total > $gear.prop('limit') && !isNaN($gear.prop('limit')))
-					total = $gear.prop('limit');
-
 				if (i.glitch)
 					total += ',g';
 				else if (i.crit_glitch)
@@ -1350,25 +1280,27 @@ var render = {
 
 			entry_text = [entry.type];
 
-			if (entry.acc_modified !== null)
-				entry_text.push('Acc ' + entry.acc + ' (' + entry.acc_modified + ')');
-			else
-				entry_text.push('Acc ' + entry.acc);
+			// if (entry.acc_modified !== null)
+			// 	entry_text.push('Acc ' + entry.acc + ' (' + entry.acc_modified + ')');
+			// else
+			// 	entry_text.push('Acc ' + entry.acc);
 
 			if (entry.damage_attribute === 'strength')
 				entry_text.push('DV (STR + ' + entry.dv + ')' + entry.damage_type);
 			else
 				entry_text.push('DV ' + entry.dv + entry.damage_type);
 
-			if (entry.ap !== 0)
-				entry_text.push('AP ' + entry.ap);
+			// if (entry.ap !== 0)
+			// 	entry_text.push('AP ' + entry.ap);
 
 			entry_text.push(entry.modes);
 
-			if (entry.rc < entry.rc_modified)
-				entry_text.push('RC ' + entry.rc + ' (' + entry.rc_modified + ')');
-			else
-				entry_text.push('RC ' + entry.dv);
+			entry_text.push('AR ' + entry.ar);
+
+			// if (entry.rc < entry.rc_modified)
+			// 	entry_text.push('RC ' + entry.rc + ' (' + entry.rc_modified + ')');
+			// else
+			// 	entry_text.push('RC ' + entry.dv);
 
 			entry_text.push(entry.ammo_count + '(' + entry.reload + ')');
 
@@ -1391,10 +1323,6 @@ var render = {
 				$gear.prop('pool', (augmented_attributes.agility - 1));
 			}
 
-			$gear.prop('limit', entry.acc);
-			if (entry.acc_modified !== null)
-				$gear.prop('limit', entry.acc_modified);
-
 			$gear.find('button').button().click(function ()
 			{
 				var $gear = $(this).parent();
@@ -1411,9 +1339,6 @@ var render = {
 					i = roll.d(d + wp.penalty);
 					total = i.hits;
 				}
-
-				if (total > $gear.prop('limit') && !isNaN($gear.prop('limit')))
-					total = $gear.prop('limit');
 
 				if (i.glitch)
 					total += ',g';
@@ -1587,7 +1512,7 @@ var render = {
 	mook_for_display: function($target, data, options)
 	{
 		// Given a target, nuke all contents and make a pretty rendering attached to the target
-		// will need to calculate augmented attributes, limits, and damage resistance pool
+		// will need to calculate augmented attributes and damage resistance pool
 		var i, $mook = render.get_template('render__display_npc');
 
 		options = $.extend({}, options);
@@ -1720,28 +1645,6 @@ var render = {
 
 		$mook.find('.information .condition_monitor .value').html(cm);
 
-		// Limits
-		var limits = this.calc_limits(data.attributes, augmented_attributes);
-
-		var limit_display = '';
-
-		if (limits.physical === limits.physical_aug)
-			limit_display += 'Physical ' + limits.physical + ', ';
-		else
-			limit_display += 'Physical ' + limits.physical + ' (' + limits.physical_aug + '), ';
-
-		if (limits.mental === limits.mental_aug)
-			limit_display += 'Mental ' + limits.mental + ', ';
-		else
-			limit_display += 'Mental ' + limits.mental + ' (' + limits.mental_aug + '), ';
-
-		if (limits.social === limits.social_aug)
-			limit_display += 'Social ' + limits.social;
-		else
-			limit_display += 'Social ' + limits.social + ' (' + limits.social_aug + ')';
-
-		$mook.find('.information .limits .value').html(limit_display);
-
 		// Qualities
 		if (data.qualities.positive.length === 0 && data.qualities.negative.length === 0)
 		{
@@ -1841,26 +1744,19 @@ var render = {
 		}
 
 		// Armor & Damage Resistance
-		// The PQ Toughness grants 1 bonus soak die
-		var soak = (data.qualities.positive.includes('Toughness')) ? 1 : 0;
-
-		soak += parseInt(augmented_attributes.body);
+		var soak = parseInt(augmented_attributes.body);
 
 		data.augmentations.forEach(function(aug)
 		{
-			if (aug.name === 'Troll Dermal Deposits')
-				soak++;
-
-			if (aug.type === 'full cyberlimb')
+			if (aug.name === 'Bone Lacing')
 			{
-				if (aug.bonus_armor > 0)
-					soak += aug.bonus_armor;
+				if (aug.rating == 1)
+					soak += 1;
+				else
+					soak += 2;
 			}
 
-			if (aug.name === 'Bone Lacing')
-				soak += (aug.rating * 2);
-
-			if (aug.name === 'Orthoskin' || aug.name === 'Dermal Plating' || aug.name === 'Bone Density Augmentation')
+			if (aug.name === 'Bone Density Augmentation')
 				soak += aug.rating;
 		});
 
@@ -1872,7 +1768,6 @@ var render = {
 			{
 				armor = armors[data.armor];
 				$mook.find('.information .armor .value').html(data.armor + ' (' + armor + ')');
-				soak += armor;
 			}
 		}
 		else
@@ -1913,10 +1808,10 @@ var render = {
 			if (entry.hasOwnProperty('force'))
 				entry_text.push('Force ' + entry.force);
 
-			if (entry.acc_modified !== null)
-				entry_text.push('Acc ' + entry.acc + ' (' + entry.acc_modified + ')');
-			else
-				entry_text.push('Acc ' + entry.acc);
+			// if (entry.acc_modified !== null)
+			// 	entry_text.push('Acc ' + entry.acc + ' (' + entry.acc_modified + ')');
+			// else
+			// 	entry_text.push('Acc ' + entry.acc);
 
 			entry_text.push('Reach ' + entry.reach);
 
@@ -1925,8 +1820,10 @@ var render = {
 			else
 				entry_text.push('DV ' + entry.dv + entry.damage_type);
 
-			if (entry.ap !== 0)
-				entry_text.push('AP ' + entry.ap);
+			entry_text.push('AR ' + entry.ar);
+
+			// if (entry.ap !== 0)
+			// 	entry_text.push('AP ' + entry.ap);
 
 			gear.push('<div>' + entry.name + ' [' + entry_text.join(', ') + ']</div>');
 		}
@@ -1944,20 +1841,17 @@ var render = {
 
 			entry_text = [entry.ability];
 
-			if (limits.physical === limits.physical_aug)
-				entry_text.push('Acc ' + limits.physical);
-			else
-				entry_text.push('Acc ' + limits.physical + ' (' + limits.physical_aug + ')');
-
 			entry_text.push('Reach ' + entry.reach);
 
-			if (entry.damage_attribute === 'strength')
-				entry_text.push('DV (STR + ' + entry.dv + ')' + entry.damage_type);
-			else
-				entry_text.push('DV ' + entry.dv + entry.damage_type);
+			// if (entry.damage_attribute === 'strength')
+			// 	entry_text.push('DV (STR + ' + entry.dv + ')' + entry.damage_type);
+			// else
+			entry_text.push('DV ' + entry.dv + entry.damage_type);
 
-			if (entry.ap !== 0)
-				entry_text.push('AP ' + entry.ap);
+			entry_text.push('AR ' + entry.ar);
+
+			// if (entry.ap !== 0)
+			// 	entry_text.push('AP ' + entry.ap);
 
 			gear.push('<div>Cyber Spur [' + entry_text.join(', ') + ']</div>');
 		}
@@ -1968,25 +1862,27 @@ var render = {
 
 			entry_text = [entry.type];
 
-			if (entry.acc_modified !== null)
-				entry_text.push('Acc ' + entry.acc + ' (' + entry.acc_modified + ')');
-			else
-				entry_text.push('Acc ' + entry.acc);
+			// if (entry.acc_modified !== null)
+			// 	entry_text.push('Acc ' + entry.acc + ' (' + entry.acc_modified + ')');
+			// else
+			// 	entry_text.push('Acc ' + entry.acc);
 
-			if (entry.damage_attribute === 'strength')
-				entry_text.push('DV (STR + ' + entry.dv + ')' + entry.damage_type);
-			else
-				entry_text.push('DV ' + entry.dv + entry.damage_type);
+			// if (entry.damage_attribute === 'strength')
+			// 	entry_text.push('DV (STR + ' + entry.dv + ')' + entry.damage_type);
+			// else
+			entry_text.push('DV ' + entry.dv + entry.damage_type);
 
-			if (entry.ap !== 0)
-				entry_text.push('AP ' + entry.ap);
+			// if (entry.ap !== 0)
+			// 	entry_text.push('AP ' + entry.ap);
 
 			entry_text.push(entry.modes);
 
-			if (entry.rc < entry.rc_modified)
-				entry_text.push('RC ' + entry.rc + ' (' + entry.rc_modified + ')');
-			else
-				entry_text.push('RC ' + entry.dv);
+			entry_text.push('AR ' + entry.ar);
+
+			// if (entry.rc < entry.rc_modified)
+			// 	entry_text.push('RC ' + entry.rc + ' (' + entry.rc_modified + ')');
+			// else
+			// 	entry_text.push('RC ' + entry.dv);
 
 			entry_text.push(entry.ammo_count + '(' + entry.reload + ')');
 
@@ -2357,18 +2253,6 @@ var render = {
 			base_augmented: base_aug,
 			dice: dice,
 			dice_augmented: dice_aug
-		}
-	},
-
-	calc_limits: function(attr, aug)
-	{
-		return {
-			physical: Math.ceil((attr.strength * 2 + attr.reaction + attr.body) / 3),
-			physical_aug: Math.ceil((aug.strength * 2 + aug.reaction + aug.body) / 3),
-			mental: Math.ceil((attr.logic * 2 + attr.intuition + attr.will) / 3),
-			mental_aug: Math.ceil((aug.logic * 2 + aug.intuition + aug.will) / 3),
-			social: Math.ceil((attr.charisma * 2 + attr.will + aug.essence) / 3),
-			social_aug: Math.ceil((aug.charisma * 2 + aug.will + aug.essence) / 3)
 		}
 	},
 

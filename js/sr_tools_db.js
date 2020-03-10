@@ -149,7 +149,7 @@ var db = {
 						break;
 
 					case 4:
-						res.weapons.push('Ares Predator V');
+						res.weapons.push('Ares Predator VI');
 						break;
 				}
 
@@ -204,7 +204,7 @@ var db = {
 				{
 					res.skills.Athletics = 1 + rating;
 					res.weapons.push('FN P93 Praetor');
-					res.weapons.push('Ares Predator V');
+					res.weapons.push('Ares Predator VI');
 					res.weapons.push('Stun Baton');
 					res.armor = 'Full Body Armor';
 					res.gear.push({
@@ -243,7 +243,7 @@ var db = {
 				}
 				else
 				{
-					res.weapons.push('Ares Predator V');
+					res.weapons.push('Ares Predator VI');
 				}
 				break;
 
@@ -277,7 +277,7 @@ var db = {
 				}
 				else
 				{
-					res.weapons.push('Ares Predator V');
+					res.weapons.push('Ares Predator VI');
 				}
 
 				if (roll.dval(3) === 3)
@@ -306,7 +306,7 @@ var db = {
 				res.skills.Firearms = rating * 2 - 1;
 				res.skills.Perception = 3 + Math.ceil(rating / 2);
 				res.skills.Stealth = 1 + rating;
-				res.weapons.push('Ares Predator V');
+				res.weapons.push('Ares Predator VI');
 				res.commlink = rating - 1;
 				res.augmentations.push({
 					name: 'Cybereyes',
@@ -319,7 +319,7 @@ var db = {
 					case 0:
 					case 1:
 						res.armor = 'Armor Jacket';
-						res.weapons.push('Enfield AS-7');
+						res.weapons.push('Mossberg CMDT');
 						break;
 
 					case 2:
@@ -625,7 +625,7 @@ var db = {
 					res.attributes.logic = 1;
 					res.attributes.will = 1;
 					res.qualities.positive.push('Toughness');
-					res.weapons.push('Enfield AS-7');
+					res.weapons.push('Mossberg CMDT');
 					break;
 
 				case 'cultist':
@@ -654,7 +654,7 @@ var db = {
 
 				case 'cultist':
 				case 'ganger':
-					bonus_weapon = 'Enfield AS-7';
+					bonus_weapon = 'Mossberg CMDT';
 					break;
 
 				case 'corpsec':
@@ -1139,7 +1139,7 @@ var db = {
 					}
 					else
 					{
-						res.weapons.push(this.get_weapon('Ares Predator V'));
+						res.weapons.push(this.get_weapon('Ares Predator VI'));
 						res.weapons.push(this.get_weapon('Colt America L36'));
 						res.gear.push(this.get_gear('Thermal Smoke Grenade'));
 						res.gear.push(this.get_gear('Fragmentation Grenade'));
@@ -1149,13 +1149,13 @@ var db = {
 				case 'Elf':
 					if (rating < 2)
 					{
-						res.weapons.push(this.get_weapon('Ares Predator V'));
+						res.weapons.push(this.get_weapon('Ares Predator VI'));
 						res.weapons.push(this.get_weapon('Fichetti Security 600'));
 					}
 					else
 					{
-						res.weapons.push(this.get_weapon('Ares Predator V'));
-						res.weapons.push(this.get_weapon('Ares Predator V'));
+						res.weapons.push(this.get_weapon('Ares Predator VI'));
+						res.weapons.push(this.get_weapon('Ares Predator VI'));
 					}
 					break;
 
@@ -1167,8 +1167,8 @@ var db = {
 					}
 					else
 					{
-						res.weapons.push(this.get_weapon('Enfield AS-7'));
-						res.weapons.push(this.get_weapon('Ares Predator V'));
+						res.weapons.push(this.get_weapon('Mossberg CMDT'));
+						res.weapons.push(this.get_weapon('Ares Predator VI'));
 					}
 
 					break;
@@ -1316,7 +1316,7 @@ var db = {
 						case 6:
 							res.weapons.push(this.get_weapon('Ares Alpha'));
 							res.weapons.push(this.get_weapon('Colt Cobra TZ-120'));
-							res.weapons.push(this.get_weapon('Ares Predator V'));
+							res.weapons.push(this.get_weapon('Ares Predator VI'));
 							break;
 					}
 					break;
@@ -1523,7 +1523,7 @@ var db = {
 			}
 			else
 			{
-				res.weapons.push(this.get_weapon('Enfield AS-7'));
+				res.weapons.push(this.get_weapon('Mossberg CMDT'));
 				res.weapons.push(this.get_weapon('Remington Roomsweeper'));
 			}
 
@@ -1977,7 +1977,7 @@ var db = {
 			name: 'Combat Axe',
 			type: 'Melee',
 			ability: 'Close Combat',
-			acc: 4,
+			ar: '9/-/-/-/-',
 			dv: 5,
 			damage_attribute: 'strength',
 			ap: -4
@@ -1987,8 +1987,8 @@ var db = {
 			name: 'Combat Knife',
 			type: 'Melee',
 			ability: 'Close Combat',
-			acc: 6,
-			dv: 2,
+			ar: '8/2*/-/-/-',
+			dv: 3,
 			damage_attribute: 'strength',
 			ap: -3
 		},
@@ -1997,8 +1997,8 @@ var db = {
 			name: 'Knife',
 			type: 'Melee',
 			ability: 'Close Combat',
-			acc: 5,
-			dv: 1,
+			ar: '6/1*/-/-/-',
+			dv: 2,
 			damage_attribute: 'strength',
 			ap: -1
 		},
@@ -2007,8 +2007,8 @@ var db = {
 			name: 'Katana',
 			type: 'Melee',
 			ability: 'Close Combat',
-			acc: 7,
-			dv: 3,
+			ar: '10/-/-/-/-',
+			dv: 4,
 			damage_attribute: 'strength',
 			ap: -3,
 			reach: 1
@@ -2018,7 +2018,7 @@ var db = {
 			name: 'Sword',
 			type: 'Melee',
 			ability: 'Close Combat',
-			acc: 6,
+			ar: '9/-/-/-/-',
 			dv: 3,
 			damage_attribute: 'strength',
 			ap: -2,
@@ -2029,7 +2029,7 @@ var db = {
 			name: 'Cyber Spur',
 			type: 'Melee',
 			ability: 'Close Combat',
-			acc: 'Physical',
+			ar: '7/-/-/-/-',
 			dv: 3,
 			damage_attribute: 'strength',
 			ap: -2
@@ -2039,7 +2039,7 @@ var db = {
 			name: 'Club',
 			type: 'Melee',
 			ability: 'Close Combat',
-			acc: 4,
+			ar: '6/-/-/-/-',
 			dv: 3,
 			damage_attribute: 'strength',
 			reach: 1
@@ -2049,8 +2049,8 @@ var db = {
 			name: 'Stun Baton',
 			type: 'Melee',
 			ability: 'Close Combat',
-			acc: 4,
-			dv: 9,
+			ar: '6/-/-/-/-',
+			dv: 5,
 			damage_type: 'S(e)',
 			ap: -5,
 			reach: 1
@@ -2060,8 +2060,8 @@ var db = {
 			name: 'Staff',
 			type: 'Melee',
 			ability: 'Close Combat',
-			acc: 6,
-			dv: 3,
+			ar: '8/-/-/-/-',
+			dv: 4,
 			damage_attribute: 'strength',
 			reach: 2
 		},
@@ -2070,8 +2070,8 @@ var db = {
 			name: 'Telescoping Staff',
 			type: 'Melee',
 			ability: 'Close Combat',
-			acc: 4,
-			dv: 2,
+			ar: '8/-/-/-/-',
+			dv: 4,
 			damage_attribute: 'strength',
 			reach: 2
 		},
@@ -2080,8 +2080,8 @@ var db = {
 			name: 'Defiance EX Shocker',
 			type: 'Taser',
 			ability: 'Firearms',
-			acc: 4,
-			dv: 9,
+			ar: '10/6*/-/-/-',
+			dv: 6,
 			damage_type: 'S(e)',
 			ap: -5,
 			modes: 'SS',
@@ -2093,9 +2093,9 @@ var db = {
 			name: 'Streetline Special',
 			type: 'Hold-out Pistol',
 			ability: 'Firearms',
-			acc: 4,
-			dv: 6,
-			modes: 'SA',
+			ar: '8/8/-/-/-',
+			dv: 2,
+			modes: 'SS',
 			ammo_count: 6,
 			reload: 'c'
 		},
@@ -2104,8 +2104,8 @@ var db = {
 			name: 'Colt America L36',
 			type: 'Light Pistol',
 			ability: 'Firearms',
-			acc: 7,
-			dv: 7,
+			ar: '8/8/6/-/-',
+			dv: 2,
 			modes: 'SA',
 			ammo_count: 11,
 			reload: 'c'
@@ -2115,9 +2115,8 @@ var db = {
 			name: 'Fichetti Security 600',
 			type: 'Light Pistol',
 			ability: 'Firearms',
-			acc: 6,
-			acc_modified: 7,
-			dv: 7,
+			ar: '10/9/6/-/-',
+			dv: 2,
 			modes: 'SA',
 			rc_modified: 1,
 			ammo_count: 30,
@@ -2125,14 +2124,13 @@ var db = {
 		},
 
 		{
-			name: 'Ares Predator V',
+			name: 'Ares Predator VI',
 			type: 'Heavy Pistol',
 			ability: 'Firearms',
-			acc: 5,
-			acc_modified: 7,
-			dv: 8,
+			ar: '10/10/8/-/-',
+			dv: 3,
 			ap: -1,
-			modes: 'SA',
+			modes: 'SA/BF',
 			ammo_count: 15,
 			reload: 'c'
 		},
@@ -2141,9 +2139,8 @@ var db = {
 			name: 'Browning Ultra-Power',
 			type: 'Heavy Pistol',
 			ability: 'Firearms',
-			acc: 5,
-			acc_modified: 6,
-			dv: 8,
+			ar: '10/9/6/-/-',
+			dv: 3,
 			ap: -1,
 			modes: 'SA',
 			ammo_count: 10,
@@ -2152,10 +2149,10 @@ var db = {
 
 		{
 			name: 'Remington Roomsweeper',
-			type: 'Heavy Pistol',
+			type: 'Shotgun',
 			ability: 'Firearms',
-			acc: 4,
-			dv: 7,
+			ar: '9/8/4/-/-',
+			dv: 5,
 			ap: -1,
 			modes: 'SA',
 			ammo_count: 8,
@@ -2166,8 +2163,8 @@ var db = {
 			name: 'Ceska Black Scorpion',
 			type: 'Machine Pistol',
 			ability: 'Firearms',
-			acc: 5,
-			dv: 6,
+			ar: '10/9/8/-/-',
+			dv: 2,
 			modes: 'SA/BF',
 			rc_modified: 1,
 			ammo_count: 35,
@@ -2178,8 +2175,8 @@ var db = {
 			name: 'Steyr TMP',
 			type: 'Machine Pistol',
 			ability: 'Firearms',
-			acc: 4,
-			dv: 7,
+			ar: '8/8/6/-/-',
+			dv: 2,
 			modes: 'SA/BF/FA',
 			ammo_count: 30,
 			reload: 'c'
@@ -2189,10 +2186,9 @@ var db = {
 			name: 'Colt Cobra TZ-120',
 			type: 'SMG',
 			ability: 'Firearms',
-			acc: 4,
-			acc_modified: 5,
-			dv: 7,
-			modes: 'SA/BF/FA',
+			ar: '10/11/8/-/-',
+			dv: 3,
+			modes: 'SA/BF',
 			rc: 2,
 			rc_modified: 3,
 			ammo_count: 32,
@@ -2203,8 +2199,8 @@ var db = {
 			name: 'FN P93 Praetor',
 			type: 'SMG',
 			ability: 'Firearms',
-			acc: 6,
-			dv: 8,
+			ar: '9/12/7/-/-',
+			dv: 4,
 			modes: 'SA/BF/FA',
 			rc: 1,
 			rc_modified: 2,
@@ -2216,10 +2212,9 @@ var db = {
 			name: 'HK-227',
 			type: 'SMG',
 			ability: 'Firearms',
-			acc: 5,
-			acc_modified: 7,
-			dv: 7,
-			modes: 'SA/BF/FA',
+			ar: '10/11/8/-/-',
+			dv: 3,
+			modes: 'SA/BF',
 			rc_modified: 1,
 			ammo_count: 28,
 			reload: 'c'
@@ -2229,8 +2224,8 @@ var db = {
 			name: 'AK-97',
 			type: 'Assault Rifle',
 			ability: 'Firearms',
-			acc: 5,
-			dv: 10,
+			ar: '4/11/9/7/1',
+			dv: 5,
 			ap: -2,
 			modes: 'SA/BF/FA',
 			ammo_count: 38,
@@ -2241,9 +2236,8 @@ var db = {
 			name: 'Ares Alpha',
 			type: 'Assault Rifle',
 			ability: 'Firearms',
-			acc: 5,
-			acc_modified: 7,
-			dv: 11,
+			ar: '4/10/9/7/2',
+			dv: 4,
 			ap: -2,
 			modes: 'SA/BF/FA',
 			rc: 2,
@@ -2255,9 +2249,8 @@ var db = {
 			name: 'FN HAR',
 			type: 'Assault Rifle',
 			ability: 'Firearms',
-			acc: 5,
-			acc_modified: 6,
-			dv: 10,
+			ar: '3/11/10/6/1',
+			dv: 5,
 			ap: -2,
 			modes: 'SA/BF/FA',
 			rc: 2,
@@ -2269,8 +2262,8 @@ var db = {
 			name: 'Cavalier Arms Crockett EBR',
 			type: 'Sniper Rifle',
 			ability: 'Firearms',
-			acc: 6,
-			dv: 12,
+			ar: '3/8/11/8/8',
+			dv: 5,
 			ap: -3,
 			modes: 'SA/BF',
 			rc_modified: 1,
@@ -2282,8 +2275,8 @@ var db = {
 			name: 'Defiance T-250',
 			type: 'Shotgun',
 			ability: 'Firearms',
-			acc: 4,
-			dv: 10,
+			ar: '7/10/6/-/-',
+			dv: 4,
 			ap: -1,
 			modes: 'SS/SA',
 			ammo_count: 5,
@@ -2291,12 +2284,11 @@ var db = {
 		},
 
 		{
-			name: 'Enfield AS-7',
+			name: 'Mossberg CMDT',
 			type: 'Shotgun',
 			ability: 'Firearms',
-			acc: 4,
-			acc_modified: 5,
-			dv: 13,
+			ar: '4/11/7/-/-',
+			dv: 4,
 			ap: -1,
 			modes: 'SA/BF',
 			ammo_count: 10,
@@ -2307,11 +2299,10 @@ var db = {
 			name: 'Ingram Valiant',
 			type: 'LMG',
 			ability: 'Exotic Ranged Weapons',
-			acc: 5,
-			acc_modified: 6,
-			dv: 9,
+			ar: '2/11/12/7/3',
+			dv: 4,
 			ap: -2,
-			modes: 'BF/FA',
+			modes: 'SA/BF/FA',
 			ammo_count: 50,
 			reload: 'c'
 		},
@@ -2320,11 +2311,10 @@ var db = {
 			name: 'Panther XXL',
 			type: 'Assault Cannon',
 			ability: 'Exotic Ranged Weapons',
-			acc: 5,
-			acc_modified: 7,
-			dv: 17,
+			ar: '1/9/12/8/6',
+			dv: 7,
 			ap: -6,
-			modes: 'SS',
+			modes: 'SA',
 			ammo_count: 15,
 			reload: 'c'
 		}
@@ -2348,8 +2338,7 @@ var db = {
 			name: name, // Display name of the weapon: Knife, Ares Predator V, etc.
 			type: '', // Display type of the weapon: Light Pistol, SMG, etc.
 			ability: '', // Linked ability: Close Combat, Firearms, etc.
-			acc: '',
-			acc_modified: null, // Modifier to conditionally apply due to smartlink, laser sight, etc.
+			ar: '-/-/-/-/-', // Attack Rating value at each range category
 			dv: '', // Damage Value
 			damage_type: 'P', // Physical, Stun, Stun(electrical)
 			damage_attribute: null, // If damage is linked to STR instead of bullet type
@@ -2465,8 +2454,7 @@ var db = {
 	get_skill_attributes: function (skill)
 	{
 		var data = {
-			attribute: null,
-			limit: null
+			attribute: null
 		};
 
 		switch (skill)
