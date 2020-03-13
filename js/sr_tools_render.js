@@ -738,6 +738,17 @@ var render = {
       init_display += ' (' + initiative.dice_augmented + 'D6)';
     }
 
+    // Major and Minor actions
+    var major = 1, minor = initiative.dice_augmented;
+
+    data.augmentations.forEach(function (aug) {
+      if (aug.name === 'Wired Reflexes' || aug.name === 'Synaptic Booster') {
+        minor += aug.rating;
+      }
+    });
+
+    init_display += ' [Major ' + major + '/minor ' + minor + ']';
+
     $mook.find('.information .initiative .value').html(init_display);
 
     $mook.find('.information .initiative button').button().click(function () {
@@ -947,9 +958,9 @@ var render = {
       $mook.find('.information .armor').hide();
     }
 
-    var dodge_roll = augmented_attributes.reaction + augmented_attributes.intuition;
-    $mook.find('.information .dodge .value').html(dodge_roll);
-    $mook.find('.information .dodge button').button().click(function () {
+    var defense_test = augmented_attributes.reaction + augmented_attributes.intuition;
+    $mook.find('.information .defense_test .value').html(defense_test);
+    $mook.find('.information .defense_test button').button().click(function () {
       var d = dodge_roll;
 
       if (wp.penalty !== 0)
@@ -957,8 +968,50 @@ var render = {
 
       var i = roll.d(d), total = i.hits;
 
-      $mook.find('.information .dodge .result').html(total);
+      $mook.find('.information .defense_test .result').html(total);
     });
+
+    // Block & Dodge roll
+    var block = 0, dodge = 0;
+    for (skill in data.skills) {
+      if (skill == 'Close Combat') block = data.skills[skill] + defense_test;
+      if (skill == 'Athletics') dodge = data.skills[skill] + defense_test;
+    }
+
+    if (block > 0) {
+      $mook.find('.information .defense_test_block .value').html(block);
+      $mook.find('.information .defense_test_block button').button().click(function () {
+        var d = block;
+  
+        if (wp.penalty !== 0)
+          d += wp.penalty;
+  
+        var i = roll.d(d), total = i.hits;
+  
+        $mook.find('.information .defense_test_block .result').html(total);
+      });
+    } else {
+      $mook.find('.information .defense_test_block').hide();
+    }
+
+    if (dodge > 0) {
+      $mook.find('.information .defense_test_dodge .value').html(dodge);
+      $mook.find('.information .defense_test_dodge button').button().click(function () {
+        var d = dodge;
+  
+        if (wp.penalty !== 0)
+          d += wp.penalty;
+  
+        var i = roll.d(d), total = i.hits;
+  
+        $mook.find('.information .defense_test_dodge .result').html(total);
+      });
+    } else {
+      $mook.find('.information .defense_test_dodge').hide();
+    }
+
+
+    // Dodge roll
 
     $mook.find('.information .damage_resistance .value').html(soak);
     $mook.find('.information .damage_resistance button').button().click(function () {
@@ -1404,6 +1457,17 @@ var render = {
       init_display += ' (' + initiative.dice_augmented + 'D6)';
     }
 
+    // Major and Minor actions
+    var major = 1, minor = initiative.dice_augmented;
+
+    data.augmentations.forEach(function (aug) {
+      if (aug.name === 'Wired Reflexes' || aug.name === 'Synaptic Booster') {
+        minor += aug.rating;
+      }
+    });
+
+    init_display += ' [Major ' + major + '/minor ' + minor + ']';
+
     $mook.find('.information .initiative .value').html(init_display);
 
     if (data.special.is_decker === true) {
@@ -1421,6 +1485,43 @@ var render = {
     else {
       $mook.find('.information .astral_initiative').hide();
     }
+
+    // Defense Rating
+    var defense_rating = parseInt(augmented_attributes.body);
+
+    data.augmentations.forEach(function (aug) {
+      if (aug.name === 'Dermal Plating' || aug.name === 'Orthoskin') {
+        defense_rating += aug.rating;
+      }
+
+      if (aug.name === 'Bone Lacing') {
+        if (aug.rating == 3)
+          defense_rating += 2;
+        else
+          defense_rating += 1;
+      }
+    });
+
+    if (data.armor.length !== 0) {
+      var armors = db.get_armor_list(), armor;
+
+      if (armors.hasOwnProperty(data.armor)) {
+        armor = armors[data.armor];
+        defense_rating += armor;
+      }
+    }
+
+    $mook.find('.information .defense_rating .value').html(defense_rating);
+
+    // Defense Test
+    var defense_test = parseInt(augmented_attributes.reaction) + parseInt(augmented_attributes.intuition);
+    var block = defense_test, dodge = defense_test;
+    for (skill in data.skills) {
+      if (skill == 'Close Combat') block += data.skills[skill];
+      if (skill == 'Athletics') dodge += data.skills[skill];
+    }
+    var defense_display = 'Base ' + defense_test + ' / Block ' + block + ' / Dodge ' + dodge;
+    $mook.find('.information .defense_test .value').html(defense_display);
 
     // Condition Monitor
     var cm = data.attributes.body > data.attributes.will ? data.attributes.body : data.attributes.will;

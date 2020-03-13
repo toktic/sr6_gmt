@@ -580,7 +580,7 @@ var db = {
           res.attributes.strength = 1;
           res.attributes.will = 1;
           res.skills['Exotic Ranged Weapons'] = 3 + rating;
-          res.skills.Demolitions = rating;
+          res.skills.Engineering = rating;
           break;
 
         case 'specops':
@@ -938,7 +938,7 @@ var db = {
       }
 
       if (['htr', 'specops'].includes(options.professional_type)) {
-        res.skills.Demolitions = rating;
+        res.skills.Engineering = rating;
       }
 
       // Augmentations & Drugs
@@ -1646,16 +1646,16 @@ var db = {
 
   get_armor_list: function () {
     return {
-      'Synth-Leather': 4,
-      'Actioneer Business Clothes': 8,
-      'Armor Clothing': 6,
-      'Armor Jacket': 12,
-      'Armor Vest': 9,
-      'Chameleon Suit': 9,
-      'Full Body Armor': 15,
-      'Full Body Armor w/ Helmet & Chemical Seal': 18,
-      'Lined Coat': 9,
-      'Urban Explorer Jumpsuit': 9
+      'Synth-Leather': 1,
+      'Actioneer Business Clothes': 2,
+      'Armor Clothing': 2,
+      'Armor Jacket': 4,
+      'Armor Vest': 3,
+      'Chameleon Suit': 2,
+      'Full Body Armor': 5,
+      'Full Body Armor w/ Helmet & Chemical Seal': 7,
+      'Lined Coat': 3,
+      'Urban Explorer Jumpsuit': 3
     };
   },
 
