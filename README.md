@@ -8,6 +8,8 @@ It is divided into several sections, all of which can be accessed by the buttons
 - Next up is the **NPC Generator**. You can use the tabs within to create a single NPC or a horde of them. Just be aware that if you create one and don't save them to the **Cast of Shadows**, they will disappear and be lost.
 - **Settings** has a selection of, you guessed it, Settings that you can change. This also has a Nuke button if you want to delete all of your saved information and start over from scratch.
 
+To access the live version of the running application on github.io, use this link: https://toktic.github.io/sr6_gmt/.
+
 This has also served as a creative outlet for programming for my own enjoyment. I have spent quite a few hours on this utility in the name of fun. There was never any intention of turning this into a money-generating enterprise. I don't want to deal with the legal or infrastructure headaches. Though if you happen to find me at a convention and want to say thanks, you can buy me a beer at GenCon. If you want to complain or sue me, I don't exist and don't attend GenCon. :D
 
 On data-retention: I use a piece of web programming functionality called Local Storage that act a little bit like cookies. The data is stored in your browser's cache for you for that browser. I have to specify both of those because it's not shared to other users on your computer, nor even other browsers. It certainly isn't shared to other computers, and I don't have access to it at all. So if you spend the time to create and save a cast of shadow denizens, make sure you create it on the computer you're bringing to the game session. Or print them out, that works too!
