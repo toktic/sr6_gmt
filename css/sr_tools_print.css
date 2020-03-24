@@ -1,0 +1,18 @@
+.top_bar {
+  display: none;
+}
+
+.menu {
+  display: none;
+}
+
+.main_content
+{
+	position: absolute;
+	top: 10px;
+	bottom: 10px;
+	left: 10px;
+	right: 10px;
+	background-color: #fff;
+	color: #000;
+}
