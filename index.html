@@ -489,7 +489,10 @@
 				<button class="tiny_button action"><span title="Action mode" class="ui-icon ui-icon-play"></span></button>
 				<button class="tiny_button edit"><span title="Edit mode" class="ui-icon ui-icon-pencil"></span></button>
 			</div>
-			<div class="npc_name"></div>
+			<div class="npc_name_wrapper">
+				<span class="ui-icon ui-icon-triangle-1-s"></span>
+				<span class="npc_name"></span>
+			</div>
 			<div class="npc_description"></div>
 			<div class="npc_notes"></div>
 			<div class="attribute_names">
@@ -606,7 +609,10 @@
 				<button class="tiny_button display"><span title="Display mode" class="ui-icon ui-icon-search"></span></button>
 				<button class="tiny_button edit"><span title="Edit mode" class="ui-icon ui-icon-pencil"></span></button>
 			</div>
-			<div class="npc_name"></div>
+			<div class="npc_name_wrapper">
+				<span class="ui-icon ui-icon-triangle-1-s"></span>
+				<span class="npc_name"></span>
+			</div>
 			<div class="npc_description"></div>
 			<div class="npc_notes"></div>
 			<div class="attribute_names">
@@ -753,7 +759,7 @@
 				<button class="big_button save"><span title="Save Changes" class="ui-icon ui-icon-disk"></span></button>
 				<button class="big_button revert"><span title="Revert Changes" class="ui-icon ui-icon-cancel"></span></button>
 			</div>
-			<div class="npc_name">
+			<div class="npc_name_wrapper">
 				<input id="name" placeholder="Name..." />
 			</div>
 			<div class="npc_description">
@@ -939,7 +945,7 @@
 			<div list></div>
 		</div>
 
-		<div template="cast__full_list_entry">
+		<div template="cast__full_list_entry" class="cast__full_list_entry">
 			<div class="entry"></div>
 			<div class="tools">
 				<button class="clone_cast_member"><span title="Clone" class="ui-icon ui-icon-copy"></span></button>

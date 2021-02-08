@@ -203,6 +203,20 @@ function view_cast(show_intro) {
       else {
         $char_template.find('.add_to_tab').detach();
       }
+
+      // Make the entry show/hide-able
+      var toggleVisibility = function(event) {
+        if ($char_template.hasClass('collapsed')) {
+          $char_template.find('.npc_name_wrapper .ui-icon').addClass('ui-icon-triangle-1-s').removeClass('ui-icon-triangle-1-e');
+          $char_template.addClass('expanded').removeClass('collapsed');
+        }
+        else {
+          $char_template.find('.npc_name_wrapper .ui-icon').addClass('ui-icon-triangle-1-e').removeClass('ui-icon-triangle-1-s');
+          $char_template.addClass('collapsed').removeClass('expanded');
+        }
+    }
+      
+      $char_template.find('.npc_name_wrapper').dblclick(toggleVisibility);
     });
 
     // Set the currently active cast tab
@@ -287,6 +301,20 @@ function view_cast(show_intro) {
           $char_template.find('.edited_date').hide();
 
         $char_template.find('.add_to_tab').detach();
+
+        // Make the entry show/hide-able
+        var toggleVisibility = function(event) {
+          if ($char_template.hasClass('collapsed')) {
+            $char_template.find('.npc_name_wrapper .ui-icon').addClass('ui-icon-triangle-1-s').removeClass('ui-icon-triangle-1-e');
+            $char_template.addClass('expanded').removeClass('collapsed');
+          }
+          else {
+            $char_template.find('.npc_name_wrapper .ui-icon').addClass('ui-icon-triangle-1-e').removeClass('ui-icon-triangle-1-s');
+            $char_template.addClass('collapsed').removeClass('expanded');
+          }
+        }
+        
+        $char_template.find('.npc_name_wrapper').dblclick(toggleVisibility);
       });
     }
     else {
