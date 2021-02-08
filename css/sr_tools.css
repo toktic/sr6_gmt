@@ -30,10 +30,6 @@ body
 	padding: 5px;
 }
 
-.big_button:hover
-{
-}
-
 .smaller_button
 {
 	font-weight: normal;
@@ -160,11 +156,6 @@ div[template_holder]
 	display: none;
 }
 
-.entry_form
-{
-
-}
-
 .entry_form > .input_row
 {
 	padding-bottom: 2px;
@@ -234,16 +225,6 @@ div[template_holder]
 	margin-top: 10px;
 }
 
-#minion_generator
-{
-
-}
-
-#minion_generator .entry_form
-{
-
-}
-
 #minion_generator .entry_form #generated_results
 {
 	width: 650px;
@@ -300,13 +281,20 @@ div[template_holder]
 	margin-right: 1px;
 }
 
-.display_npc_wrapper .npc_name,
+.display_npc_wrapper .npc_name_wrapper,
 .display_npc_wrapper .npc_description,
 .display_npc_wrapper .npc_notes
 {
 	border-bottom: 1px solid #ccee00;
 	padding: 2px 2px 2px 4px;
 }
+
+.display_npc_wrapper .npc_description,
+.display_npc_wrapper .npc_notes
+{
+	padding-left: 24px;
+}
+
 .display_npc_wrapper .attribute_names
 {
 	border-bottom: 1px solid #ccee00;
@@ -509,11 +497,6 @@ div[template_holder]
 	padding-left: 5px;
 }
 
-.edit_npc_wrapper .other_information .skills
-{
-
-}
-
 .edit_npc_wrapper .other_information .skills .value
 {
 	padding-left: 5px;
@@ -574,16 +557,6 @@ div[template_holder]
 	padding-right: 25px;
 }
 
-.cast_of_shadows
-{
-
-}
-
-.cast_of_shadows .add_tab_wrapper
-{
-
-}
-
 .cast_of_shadows .add_tab_wrapper button
 {
 	vertical-align: bottom;
@@ -592,21 +565,6 @@ div[template_holder]
 .cast_of_shadows .edit_tab_wrapper button
 {
 	vertical-align: bottom;
-}
-
-.cast_of_shadows .cast_tabs
-{
-
-}
-
-.cast_of_shadows .cast__full_list
-{
-
-}
-
-.cast_of_shadows .cast__full_list > div[list]
-{
-
 }
 
 .cast_of_shadows .cast__full_list > div[list] > div
@@ -651,4 +609,28 @@ div[template_holder]
 {
 	flex: 2 0 200px;
 	padding-left: 10px;
+}
+
+.cast_of_shadows .cast__full_list_entry.collapsed .entry .controls,
+.cast_of_shadows .cast__full_list_entry.collapsed .entry .attribute_names,
+.cast_of_shadows .cast__full_list_entry.collapsed .entry .attribute_values,
+.cast_of_shadows .cast__full_list_entry.collapsed .entry .information
+{
+	display: none;
+}
+
+.cast_of_shadows .cast__full_list_entry.collapsed .entry .npc_description,
+.cast_of_shadows .cast__full_list_entry.collapsed .entry .npc_notes
+{
+	border-bottom: 0;
+}
+
+.cast_of_shadows .cast__full_list_entry.collapsed .tools
+{
+	visibility: hidden;
+}
+
+.cast_of_shadows .cast__full_list_entry.collapsed .tools > *
+{
+	display: none;
 }
